@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -217,9 +218,14 @@
     <Compile Include="Migrations\201903051433185_city.Designer.cs">
       <DependentUpon>201903051433185_city.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903051622501_category.cs" />
+    <Compile Include="Migrations\201903051622501_category.Designer.cs">
+      <DependentUpon>201903051622501_category.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -379,6 +385,11 @@
     <Content Include="Views\Cities\Details.cshtml" />
     <Content Include="Views\Cities\Edit.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -420,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903051433185_city.resx">
       <DependentUpon>201903051433185_city.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051622501_category.resx">
+      <DependentUpon>201903051622501_category.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
