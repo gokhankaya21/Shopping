@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201903061419425_variant.Designer.cs">
       <DependentUpon>201903061419425_variant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903061633236_productimages.cs" />
+    <Compile Include="Migrations\201903061633236_productimages.Designer.cs">
+      <DependentUpon>201903061633236_productimages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
@@ -238,6 +242,7 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProductImageModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
@@ -444,9 +449,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ProductImage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
@@ -494,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903061419425_variant.resx">
       <DependentUpon>201903061419425_variant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903061633236_productimages.resx">
+      <DependentUpon>201903061633236_productimages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

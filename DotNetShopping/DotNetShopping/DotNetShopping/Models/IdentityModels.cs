@@ -37,5 +37,6 @@ namespace DotNetShopping.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Variant> Variants { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

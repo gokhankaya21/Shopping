@@ -14,17 +14,34 @@ namespace DotNetShopping.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            return View(new List<Product>());
         }
 
         public ActionResult Create()
         {
+            ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name");
+            ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name");
+            ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name");
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(ProductCreateModel model)
         {
+            try
+            {
+                db.Products.Add(model);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+            }
+            var products = db.Products.OrderBy(x => x.Name).ToList();
+            products.Insert(0, new Product { Name = "No Product" });
+            ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name",model.SupplierId);
+            ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name",model.BrandId);
+            ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name",model.CategoryId);
             return View();
         }
 

@@ -55,7 +55,7 @@ namespace DotNetShopping.Models
         public string ProductName { get; set; }
         public Int16 SupplierId { get; set; }
         public Int16 BrandId { get; set; }
-        public Int16 CaregoryId { get; set; }
+        public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public Product.ProductUnit Unit { get; set; }
         public Int64 UserId { get; set; }
@@ -75,7 +75,7 @@ namespace DotNetShopping.Models
         public string ProductName { get; set; }
         public Int16 SupplierId { get; set; }
         public Int16 BrandId { get; set; }
-        public Int16 CaregoryId { get; set; }
+        public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public Product.ProductUnit Unit { get; set; }
         public Int64 UserId { get; set; }
