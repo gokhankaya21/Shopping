@@ -90,7 +90,6 @@ namespace DotNetShopping.Controllers
                 ViewBag.Error = ex.Message;
             }
             var products = db.Products.OrderBy(x => x.Name).ToList();
-            products.Insert(0, new Product { Name = "No Product" });
             ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name", model.SupplierId);
             ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name", model.BrandId);
             ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
@@ -98,15 +97,60 @@ namespace DotNetShopping.Controllers
         }
 
 
-        public ActionResult Edit()
+        public ActionResult Edit(Int64 id)
         {
-            return View();
+            var product = db.Products.Find(id);
+            if (product != null)
+            {
+                var model = new ProductEditModel
+                {
+                    ProductId = product.ProductId,
+                    ProductName = product.Name,
+                    BrandId = product.BrandId,
+                    SupplierId = product.SupplierId,
+                    CategoryId = product.CategoryId,
+                    Description = product.Description,
+                    IsVisible = product.IsVisible,
+                    OnSale = product.OnSale,
+                    Unit = product.Unit
+                };
+                ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name", model.SupplierId);
+                ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name", model.BrandId);
+                ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", new { Error = "Product Not Found" });
+            }
         }
 
         [HttpPost]
         public ActionResult Edit(ProductEditModel model)
         {
-            return View();
+            var product = db.Products.Find(model.ProductId);
+            if (product != null)
+            {
+                product.Name = model.ProductName;
+                product.BrandId = model.BrandId;
+                product.CategoryId = model.CategoryId;
+                product.Description = model.Description;
+                product.IsVisible = model.IsVisible;
+                product.OnSale = model.OnSale;
+                product.SupplierId = model.SupplierId;
+                product.Unit = model.Unit;
+                product.UpdateDate = DateTime.Today;
+                product.UpdateUser = User.Identity.GetUserId();
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name", model.SupplierId);
+                ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name", model.BrandId);
+                ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
+                return View(model);
+            }
         }
 
         public ActionResult Delete()
@@ -115,9 +159,9 @@ namespace DotNetShopping.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Int64 ProductId)
+        public ActionResult Delete(Int64 id)
         {
-            var product = db.Products.Find(ProductId);
+            var product = db.Products.Find(id);
             product.Archived = true;
             db.SaveChanges();
             return RedirectToAction("Index");
