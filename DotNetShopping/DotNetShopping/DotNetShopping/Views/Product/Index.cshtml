@@ -1,11 +1,11 @@
-﻿@model IEnumerable<DotNetShopping.Models.Product>
+﻿@model IEnumerable<DotNetShopping.Models.ProductListModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Product</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,34 +13,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Brand.Name)
+            @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Supplier.Name)
+            @Html.DisplayNameFor(model => model.VariantName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.SupplierName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CaregoryId)
+            @Html.DisplayNameFor(model => model.BrandName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Unit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateUser)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OnSale)
@@ -49,7 +34,13 @@
             @Html.DisplayNameFor(model => model.IsVisible)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Archived)
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
         </th>
         <th></th>
     </tr>
@@ -57,34 +48,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Brand.Name)
+            @Html.DisplayFor(modelItem => item.ProductName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Supplier.Name)
+            @Html.DisplayFor(modelItem => item.VariantName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.SupplierName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CaregoryId)
+            @Html.DisplayFor(modelItem => item.BrandName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Unit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateUser)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateUser)
+            @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OnSale)
@@ -93,12 +69,19 @@
             @Html.DisplayFor(modelItem => item.IsVisible)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Archived)
+            @Html.DisplayFor(modelItem => item.Cost)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock)
+        </td>
+        <td>
+            @Html.ActionLink("ProductEdit", "Edit", new { id = item.ProductId }) |
+            @Html.ActionLink("VariantEdit", "VariantEdit", new { id = item.VariantId }) |
+            @Html.ActionLink("ProductDelete", "Delete", new { id = item.ProductId }) |
+            @Html.ActionLink("VariantDelete", "VariantDelete", new { id = item.VariantId })
         </td>
     </tr>
 }

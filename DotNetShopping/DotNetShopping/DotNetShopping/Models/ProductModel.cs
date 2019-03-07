@@ -35,14 +35,14 @@ namespace DotNetShopping.Models
         public Int16 BrandId { get; set; }
         public Brand Brand { get; set; }
 
-        public Int16 CaregoryId { get; set; }
+        public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public ProductUnit Unit { get; set; }
         
         public DateTime CreateDate { get; set; }
-        public Int64 CreateUser { get; set; }
+        public string CreateUser { get; set; }
         public DateTime UpdateDate { get; set; }
-        public Int64 UpdateUser { get; set; }
+        public string UpdateUser { get; set; }
 
         public bool OnSale { get; set; }
         public bool IsVisible { get; set; }
@@ -58,7 +58,6 @@ namespace DotNetShopping.Models
         public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public Product.ProductUnit Unit { get; set; }
-        public Int64 UserId { get; set; }
         public bool OnSale { get; set; }
         public bool IsVisible { get; set; }
 
@@ -78,8 +77,24 @@ namespace DotNetShopping.Models
         public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public Product.ProductUnit Unit { get; set; }
-        public Int64 UserId { get; set; }
         public bool OnSale { get; set; }
         public bool IsVisible { get; set; }
+    }
+    public class ProductListModel
+    {
+        public Int64 ProductId { get; set; }
+        public Int64 VariantId { get; set; }
+        [Display(Name = "Product Name")]
+        public string ProductName { get; set; }
+        [Display(Name = "Variant Name")]
+        public string VariantName { get; set; }
+        public string SupplierName { get; set; }
+        public string BrandName { get; set; }
+        public string CategoryName { get; set; }
+        public bool OnSale { get; set; }
+        public bool IsVisible { get; set; }
+        public Decimal Cost { get; set; }
+        public Decimal UnitPrice { get; set; }        
+        public Int16 Stock { get; set; }
     }
 }

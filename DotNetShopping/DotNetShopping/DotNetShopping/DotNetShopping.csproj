@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -233,6 +233,18 @@
     <Compile Include="Migrations\201903061633236_productimages.cs" />
     <Compile Include="Migrations\201903061633236_productimages.Designer.cs">
       <DependentUpon>201903061633236_productimages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071314463_productid.cs" />
+    <Compile Include="Migrations\201903071314463_productid.Designer.cs">
+      <DependentUpon>201903071314463_productid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071318286_variantid.cs" />
+    <Compile Include="Migrations\201903071318286_variantid.Designer.cs">
+      <DependentUpon>201903071318286_variantid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071322362_productid1.cs" />
+    <Compile Include="Migrations\201903071322362_productid1.Designer.cs">
+      <DependentUpon>201903071322362_productid1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -504,6 +516,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903061633236_productimages.resx">
       <DependentUpon>201903061633236_productimages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071314463_productid.resx">
+      <DependentUpon>201903071314463_productid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071318286_variantid.resx">
+      <DependentUpon>201903071318286_variantid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071322362_productid1.resx">
+      <DependentUpon>201903071322362_productid1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -26,9 +26,9 @@ namespace DotNetShopping.Models
         public Int16 Stock { get; set; }
 
         public DateTime CreateDate { get; set; }
-        public Int64 CreateUser { get; set; }
+        public string CreateUser { get; set; }
         public DateTime UpdateDate { get; set; }
-        public Int64 UpdateUser { get; set; }
+        public string UpdateUser { get; set; }
 
         public bool IsVisible { get; set; }
         public bool Archived { get; set; }
@@ -42,7 +42,6 @@ namespace DotNetShopping.Models
         public Decimal UnitPrice { get; set; }
         public Decimal Cost { get; set; }
         public Int16 Stock { get; set; }
-        public Int64 UserId { get; set; }
         public bool IsVisible { get; set; }
 
     }
@@ -55,7 +54,6 @@ namespace DotNetShopping.Models
         public Decimal UnitPrice { get; set; }
         public Decimal Cost { get; set; }
         public Int16 Stock { get; set; }
-        public Int64 UserId { get; set; }
         public bool IsVisible { get; set; }
     }
 }
