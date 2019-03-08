@@ -55,9 +55,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="notifications.html">
+                        <a href="@Url.Action("Index","Product")">
                             <i class="pe-7s-bell"></i>
-                            <p>Notifications</p>
+                            <p>Products</p>
                         </a>
                     </li>
                     <li class="active-pro">
@@ -199,7 +199,7 @@
     <script src="~/Scripts/demo.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
+        @RenderSection("scriptsready", required: false)
             demo.initChartist();
 
             $.notify({

@@ -151,6 +151,7 @@ namespace DotNetShopping.Controllers
                 ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
                 return View(model);
             }
+
         }
 
         public ActionResult Delete()
@@ -172,27 +173,89 @@ namespace DotNetShopping.Controllers
             return View();
         }
 
-        public ActionResult VariantCreate()
+        public ActionResult VariantCreate(Int64 id)
         {
-            return View();
+            var product = db.Products.Find(id);
+            if (product != null)
+            {
+                var model = new VariantCreateModel();
+                model.ProductId = id;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", new { Error = "Product Not Found" });
+            }
         }
 
         [HttpPost]
         public ActionResult VariantCreate(VariantCreateModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            else
+            {
+                var today = DateTime.Today;
+                var variant = new Variant();
+                variant.ProductId = model.ProductId;
+                variant.Name = model.VariantName;
+                variant.IsVisible = model.IsVisible;
+                variant.Stock = model.Stock;
+                variant.UnitPrice = model.UnitPrice;
+                variant.CreateDate = today;
+                variant.UpdateDate = today;
+                variant.CreateUser = User.Identity.GetUserId();
+                variant.UpdateUser = User.Identity.GetUserId();
+                db.Variants.Add(variant);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
 
-        public ActionResult VariantEdit()
+        public ActionResult VariantEdit(Int64 id)
         {
-            return View();
+            var variant = db.Variants.Find(id);
+            if (variant != null)
+            {
+                var model = new VariantEditModel();
+                model.ProductId = variant.ProductId;
+                model.VariantId = variant.VariantId;
+                model.VariantName = variant.Name;
+                model.UnitPrice = variant.UnitPrice;
+                model.Stock = variant.Stock;
+                model.IsVisible = variant.IsVisible;
+                model.Cost = variant.Cost;
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", new { Error = "Variant Not Found" });
+            }
         }
 
         [HttpPost]
         public ActionResult VariantEdit(VariantEditModel model)
         {
-            return View();
+            var variant = db.Variants.Find(model.VariantId);
+            if (variant != null)
+            {
+                variant.ProductId = model.ProductId;
+                variant.VariantId = model.VariantId;
+                variant.Name = model.VariantName;
+                variant.UnitPrice = model.UnitPrice;
+                variant.Stock = model.Stock;
+                variant.IsVisible = model.IsVisible;
+                variant.Cost = model.Cost;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", new { Error = "Variant Not Found" });
+            }
         }
 
         public ActionResult VariantDelete()

@@ -79,7 +79,9 @@
         </td>
         <td>
             @Html.ActionLink("ProductEdit", "Edit", new { id = item.ProductId }) |
-            @Html.ActionLink("VariantEdit", "VariantEdit", new { id = item.VariantId }) |
+            @Html.ActionLink("Variants", "Variants", new { id = item.VariantId })
+            @Html.ActionLink("CreateVariant", "VariantCreate", new { id = item.VariantId })
+            @Html.ActionLink("VariantEdit", "VariantEdit", new { id = item.VariantId })|
             @Html.ActionLink("ProductDelete", "Delete", new { id = item.ProductId }) |
             @Html.ActionLink("VariantDelete", "VariantDelete", new { id = item.VariantId })
         </td>
