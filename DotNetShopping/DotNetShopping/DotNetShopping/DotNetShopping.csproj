@@ -465,6 +465,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\VariantEdit.cshtml" />
     <Content Include="Views\Product\VariantCreate.cshtml" />
+    <Content Include="Views\Product\Variants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

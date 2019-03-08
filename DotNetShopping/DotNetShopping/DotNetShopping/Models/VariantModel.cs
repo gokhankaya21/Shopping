@@ -56,4 +56,15 @@ namespace DotNetShopping.Models
         public Int16 Stock { get; set; }
         public bool IsVisible { get; set; }
     }
+    public class VariantListModel
+    {
+        public Int64 VariantId { get; set; }
+        [Display(Name = "Variant Name")]
+        public string VariantName { get; set; }
+        public Int64 ProductId { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public Decimal Cost { get; set; }
+        public Int16 Stock { get; set; }
+        public bool IsVisible { get; set; }
+    }
 }

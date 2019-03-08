@@ -45,47 +45,56 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VariantName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupplierName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OnSale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsVisible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("ProductEdit", "Edit", new { id = item.ProductId }) |
-            @Html.ActionLink("Variants", "Variants", new { id = item.VariantId })
-            @Html.ActionLink("CreateVariant", "VariantCreate", new { id = item.VariantId })
-            @Html.ActionLink("VariantEdit", "VariantEdit", new { id = item.VariantId })|
-            @Html.ActionLink("ProductDelete", "Delete", new { id = item.ProductId }) |
-            @Html.ActionLink("VariantDelete", "VariantDelete", new { id = item.VariantId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VariantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnSale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsVisible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @Html.ActionLink("Product Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Variants", "Variants", new { id = item.VariantId }) |
+                @Html.ActionLink("Create Variant", "VariantCreate", new { id = item.VariantId }) |
+                @Html.ActionLink("Variant Edit", "VariantEdit", new { id = item.VariantId }) |
+                @Html.ActionLink("Product Delete", "Delete", new { id = item.ProductId }, new { @class = "deleteProduct" }) |
+                @Html.ActionLink("Variant Delete", "VariantDelete", new { id = item.VariantId }, new { @class = "deleteVariant" })
+            </td>
+        </tr>
+    }
 
 </table>
+@section scriptsready{
+    $('.deleteProduct').click(function(){
+    return confirm("Are you sure you want to delete this product?");
+    })
+    $('.deleteVariant').click(function(){
+    return confirm("Are you sure you want to delete this variant?");
+    })
+}

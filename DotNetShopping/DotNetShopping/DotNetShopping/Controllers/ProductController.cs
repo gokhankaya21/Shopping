@@ -154,12 +154,6 @@ namespace DotNetShopping.Controllers
 
         }
 
-        public ActionResult Delete()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public ActionResult Delete(Int64 id)
         {
             var product = db.Products.Find(id);
@@ -168,9 +162,20 @@ namespace DotNetShopping.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Variants()
+        public ActionResult Variants(Int64 id)
         {
-            return View();
+            var model = db.Variants.Where(x => x.ProductId == id && !x.Archived).Select(x => new VariantListModel
+
+                {
+                    VariantId = x.VariantId,
+                    VariantName = x.Name,
+                    Cost = x.Cost,
+                    IsVisible = x.IsVisible,
+                    ProductId = x.ProductId,
+                    Stock = x.Stock,
+                    UnitPrice = x.UnitPrice
+                });
+                return View(model);
         }
 
         public ActionResult VariantCreate(Int64 id)
@@ -258,18 +263,12 @@ namespace DotNetShopping.Controllers
             }
         }
 
-        public ActionResult VariantDelete()
+        public ActionResult VariantDelete(Int64 id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult VariantDelete(Int64 VariantId)
-        {
-            var variant = db.Variants.Find(VariantId);
+            var variant = db.Variants.Find(id);
             variant.Archived = true;
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Variants",new { id = variant.ProductId});
         }
     }
 }
