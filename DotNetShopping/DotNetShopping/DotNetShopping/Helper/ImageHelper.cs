@@ -131,6 +131,7 @@ namespace DotNetShopping.Helpers
         }
         public static void SaveImage(string Path, System.Drawing.Image Image)
         {
+            Image = WatermarkText(Image, "DotNet Shopping");
             ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
             Encoder myEncoder = Encoder.Quality;
             EncoderParameters myEncoderParameters = new EncoderParameters(1);
@@ -138,6 +139,31 @@ namespace DotNetShopping.Helpers
                 80L);
             myEncoderParameters.Param[0] = myEncoderParameter;
             Image.Save(Path, jgpEncoder, myEncoderParameters);
+        }
+        public static Image WatermarkText(Image image, string watermarkText)
+        {
+            FontFamily family = new FontFamily("Arial");
+            Color color = Color.FromArgb(50, 0, 0, 0);
+            Color color2 = Color.FromArgb(100, 255, 255, 255);
+            Point atpoint = new Point(image.Width / 2, image.Height / 2);
+            SolidBrush brush = new SolidBrush(color);
+            SolidBrush brush2 = new SolidBrush(color2);
+            Graphics graphics = Graphics.FromImage(image);
+
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+            int emSize = 96;
+            GraphicsPath myPath = new GraphicsPath();
+            int fontStyle = (int)FontStyle.Italic;
+            myPath.AddString(watermarkText, family, fontStyle, emSize, atpoint, sf);
+
+            graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            graphics.FillPath(brush, myPath);
+            graphics.DrawPath(new Pen(brush2, 2), myPath);
+            graphics.Dispose();
+
+            return image;
         }
     }
 }
