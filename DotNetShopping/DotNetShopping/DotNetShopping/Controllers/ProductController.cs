@@ -1,7 +1,9 @@
-﻿using DotNetShopping.Models;
+﻿using DotNetShopping.Helpers;
+using DotNetShopping.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -166,16 +168,16 @@ namespace DotNetShopping.Controllers
         {
             var model = db.Variants.Where(x => x.ProductId == id && !x.Archived).Select(x => new VariantListModel
 
-                {
-                    VariantId = x.VariantId,
-                    VariantName = x.Name,
-                    Cost = x.Cost,
-                    IsVisible = x.IsVisible,
-                    ProductId = x.ProductId,
-                    Stock = x.Stock,
-                    UnitPrice = x.UnitPrice
-                });
-                return View(model);
+            {
+                VariantId = x.VariantId,
+                VariantName = x.Name,
+                Cost = x.Cost,
+                IsVisible = x.IsVisible,
+                ProductId = x.ProductId,
+                Stock = x.Stock,
+                UnitPrice = x.UnitPrice
+            });
+            return View(model);
         }
 
         public ActionResult VariantCreate(Int64 id)
@@ -268,7 +270,43 @@ namespace DotNetShopping.Controllers
             var variant = db.Variants.Find(id);
             variant.Archived = true;
             db.SaveChanges();
-            return RedirectToAction("Variants",new { id = variant.ProductId});
+            return RedirectToAction("Variants", new { id = variant.ProductId });
+        }
+        public ActionResult PhotoAdd(Int64 id,Int64 ProductId)
+        {
+            ViewBag.Error = "";
+            var model = new PhotoAddModel();
+            model.VariantId = id;
+            model.ProductId = ProductId;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult PhotoAdd(PhotoAddModel model)
+        {
+            ViewBag.Error = "";
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (model.UploadedFile != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/ProductImage"), Path.GetFileName(model.UploadedFile.FileName));
+
+                        var image = System.Drawing.Image.FromStream(model.UploadedFile.InputStream);
+
+                        var resizedImage = ImageHelper.HardResizeImage(1000, 1000, image);
+
+                        ImageHelper.SaveImage(path, resizedImage);
+                    }
+                }
+                return RedirectToAction("Variants", new { id = model.ProductId });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(model);
+            }
         }
     }
 }

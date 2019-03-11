@@ -67,4 +67,10 @@ namespace DotNetShopping.Models
         public Int16 Stock { get; set; }
         public bool IsVisible { get; set; }
     }
+    public class PhotoAddModel
+    {
+        public Int64 VariantId { get; set; }
+        public Int64 ProductId { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
+    }
 }

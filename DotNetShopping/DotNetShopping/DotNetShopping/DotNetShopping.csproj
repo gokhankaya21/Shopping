@@ -186,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Migrations\201903051400241_InitialCreate.cs" />
     <Compile Include="Migrations\201903051400241_InitialCreate.Designer.cs">
       <DependentUpon>201903051400241_InitialCreate.cs</DependentUpon>
@@ -466,6 +467,7 @@
     <Content Include="Views\Product\VariantEdit.cshtml" />
     <Content Include="Views\Product\VariantCreate.cshtml" />
     <Content Include="Views\Product\Variants.cshtml" />
+    <Content Include="Views\Product\PhotoAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
