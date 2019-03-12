@@ -187,6 +187,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Migrations\201903051400241_InitialCreate.cs" />
     <Compile Include="Migrations\201903051400241_InitialCreate.Designer.cs">
       <DependentUpon>201903051400241_InitialCreate.cs</DependentUpon>
@@ -246,6 +247,10 @@
     <Compile Include="Migrations\201903071322362_productid1.cs" />
     <Compile Include="Migrations\201903071322362_productid1.Designer.cs">
       <DependentUpon>201903071322362_productid1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121257485_imagesequence.cs" />
+    <Compile Include="Migrations\201903121257485_imagesequence.Designer.cs">
+      <DependentUpon>201903121257485_imagesequence.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -531,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903071322362_productid1.resx">
       <DependentUpon>201903071322362_productid1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121257485_imagesequence.resx">
+      <DependentUpon>201903121257485_imagesequence.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

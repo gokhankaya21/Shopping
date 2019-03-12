@@ -291,13 +291,10 @@ namespace DotNetShopping.Controllers
                 {
                     if (model.UploadedFile != null)
                     {
-                        string path = Path.Combine(Server.MapPath("~/ProductImage"), Path.GetFileName(model.UploadedFile.FileName));
-
+                        var productImage = new ProductImage();
+                        string fileName = productImage.InsertProductImage(model.VariantId);
                         var image = System.Drawing.Image.FromStream(model.UploadedFile.InputStream);
-
-                        var resizedImage = ImageHelper.HardResizeImage(1000, 1000, image);
-
-                        ImageHelper.SaveImage(path, resizedImage);
+                        ImageHelper.SaveImage(fileName, image);
                     }
                 }
                 return RedirectToAction("Variants", new { id = model.ProductId });

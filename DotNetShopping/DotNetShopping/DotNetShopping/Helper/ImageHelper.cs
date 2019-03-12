@@ -129,8 +129,10 @@ namespace DotNetShopping.Helpers
             }
             return null;
         }
-        public static void SaveImage(string Path, System.Drawing.Image Image)
+        public static void SaveImage(string name, System.Drawing.Image Image)
         {
+            string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/ProductImage"), name);
+            Image = ImageHelper.HardResizeImage(1000, 1000, Image);
             Image = WatermarkText(Image, "DotNet Shopping");
             ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
             Encoder myEncoder = Encoder.Quality;
@@ -138,7 +140,7 @@ namespace DotNetShopping.Helpers
             EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder,
                 80L);
             myEncoderParameters.Param[0] = myEncoderParameter;
-            Image.Save(Path, jgpEncoder, myEncoderParameters);
+            Image.Save(path, jgpEncoder, myEncoderParameters);
         }
         public static Image WatermarkText(Image image, string watermarkText)
         {
