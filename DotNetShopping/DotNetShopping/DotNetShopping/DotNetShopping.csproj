@@ -181,6 +181,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -472,7 +473,8 @@
     <Content Include="Views\Product\VariantEdit.cshtml" />
     <Content Include="Views\Product\VariantCreate.cshtml" />
     <Content Include="Views\Product\Variants.cshtml" />
-    <Content Include="Views\Product\PhotoAdd.cshtml" />
+    <Content Include="Views\ProductImage\PhotoAdd.cshtml" />
+    <Content Include="Views\ProductImage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,7 +50,10 @@
     {
         <tr>
             <td>
-                <img src="~/ProductImage/@item.PhotoName" width="200" />
+                @if (item.PhotoName != "")
+                {
+                    <img src="~/ProductImage/@item.PhotoName" width="200" />
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)

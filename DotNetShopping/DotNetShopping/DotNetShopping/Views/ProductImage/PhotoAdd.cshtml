@@ -8,7 +8,7 @@
 
 <div class="error">@ViewBag.Error</div>
 
-@using (Html.BeginForm("PhotoAdd", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("PhotoAdd", "ProductImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
