@@ -35,7 +35,8 @@ namespace DotNetShopping.Controllers
                     IsVisible = x.pv.Product.IsVisible == true ? x.pv.Variant.IsVisible : false,
                     OnSale = x.pv.Product.OnSale,
                     Stock = x.pv.Variant.Stock,
-                    UnitPrice = x.pv.Variant.UnitPrice
+                    UnitPrice = x.pv.Variant.UnitPrice,
+                    PhotoName = db.ProductImages.Where(i => i.VariantId == x.pv.Variant.VariantId).OrderBy(i => i.Sequence).FirstOrDefault().FileName
                 });
             return View(products.ToList());
         }
@@ -166,17 +167,19 @@ namespace DotNetShopping.Controllers
 
         public ActionResult Variants(Int64 id)
         {
-            var model = db.Variants.Where(x => x.ProductId == id && !x.Archived).Select(x => new VariantListModel
+            var model = db.Variants.Where(x => x.ProductId == id && !x.Archived)
+                .Select(x => new VariantListModel
 
-            {
-                VariantId = x.VariantId,
-                VariantName = x.Name,
-                Cost = x.Cost,
-                IsVisible = x.IsVisible,
-                ProductId = x.ProductId,
-                Stock = x.Stock,
-                UnitPrice = x.UnitPrice
-            });
+                {
+                    VariantId = x.VariantId,
+                    VariantName = x.Name,
+                    Cost = x.Cost,
+                    IsVisible = x.IsVisible,
+                    ProductId = x.ProductId,
+                    Stock = x.Stock,
+                    UnitPrice = x.UnitPrice,
+                    PhotoName = db.ProductImages.Where(i => i.VariantId == x.VariantId).OrderBy(i => i.Sequence).FirstOrDefault().FileName
+                });
             return View(model);
         }
 
@@ -272,7 +275,7 @@ namespace DotNetShopping.Controllers
             db.SaveChanges();
             return RedirectToAction("Variants", new { id = variant.ProductId });
         }
-        public ActionResult PhotoAdd(Int64 id,Int64 ProductId)
+        public ActionResult PhotoAdd(Int64 id, Int64 ProductId)
         {
             ViewBag.Error = "";
             var model = new PhotoAddModel();
@@ -291,10 +294,17 @@ namespace DotNetShopping.Controllers
                 {
                     if (model.UploadedFile != null)
                     {
-                        var productImage = new ProductImage();
-                        string fileName = productImage.InsertProductImage(model.VariantId);
                         var image = System.Drawing.Image.FromStream(model.UploadedFile.InputStream);
-                        ImageHelper.SaveImage(fileName, image);
+                        if (image.Width >= 1000 && image.Height >= 1000)
+                        {
+                            var productImage = new ProductImage();
+                            string fileName = productImage.InsertProductImage(model.VariantId);
+                            ImageHelper.SaveImage(fileName, image);
+                        }
+                        else
+                        {
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                        }
                     }
                 }
                 return RedirectToAction("Variants", new { id = model.ProductId });

@@ -96,5 +96,6 @@ namespace DotNetShopping.Models
         public Decimal Cost { get; set; }
         public Decimal UnitPrice { get; set; }        
         public Int16 Stock { get; set; }
+        public string PhotoName { get; set; }
     }
 }

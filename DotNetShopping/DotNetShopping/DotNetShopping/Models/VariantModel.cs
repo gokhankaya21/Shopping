@@ -66,6 +66,7 @@ namespace DotNetShopping.Models
         public Decimal Cost { get; set; }
         public Int16 Stock { get; set; }
         public bool IsVisible { get; set; }
+        public string PhotoName { get; set; }
     }
     public class PhotoAddModel
     {

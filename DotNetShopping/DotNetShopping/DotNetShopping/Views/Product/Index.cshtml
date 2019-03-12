@@ -12,6 +12,7 @@
 </p>
 <table class="table">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
@@ -49,6 +50,9 @@
     {
         <tr>
             <td>
+                <img src="~/ProductImage/@item.PhotoName" width="200" />
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
             <td>
@@ -80,8 +84,8 @@
             </td>
             <td>
                 @Html.ActionLink("Product Edit", "Edit", new { id = item.ProductId }) |
-                @Html.ActionLink("Variants", "Variants", new { id = item.VariantId }) |
-                @Html.ActionLink("Create Variant", "VariantCreate", new { id = item.VariantId }) |
+                @Html.ActionLink("Variants", "Variants", new { id = item.ProductId }) |
+                @Html.ActionLink("Create Variant", "VariantCreate", new { id = item.ProductId }) |
                 @Html.ActionLink("Variant Edit", "VariantEdit", new { id = item.VariantId }) |
                 @Html.ActionLink("Product Delete", "Delete", new { id = item.ProductId }, new { @class = "deleteProduct" }) |
                 @Html.ActionLink("Variant Delete", "VariantDelete", new { id = item.VariantId }, new { @class = "deleteVariant" })
