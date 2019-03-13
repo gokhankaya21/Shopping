@@ -90,5 +90,44 @@ namespace DotNetShopping.Controllers
                 return RedirectToAction("Index", new { id = VariantId, Error = ex.Message });
             }
         }
+        public ActionResult Sequence(string direction, Int64 imageId)
+        {
+            var image = db.ProductImages.Find(imageId);
+            if (image != null)
+            {
+                var productImages = db.ProductImages.Where(x => x.VariantId == image.VariantId).OrderBy(x => x.Sequence).ToList();
+                Int16 currentIndex = 0;
+                for (Int16 i = 0; i < productImages.Count; i++)
+                {
+                    var pi = productImages[i];
+                    if (pi.Sequence != i)
+                    {
+                        pi.Sequence = i;
+                    }
+                    if (pi.ImageId == image.ImageId)
+                    {
+                        currentIndex = i;
+                    }
+                }
+                if (direction == "up")
+                {
+                    if (currentIndex > 0)
+                    {
+                        productImages[currentIndex].Sequence--;
+                        productImages[currentIndex - 1].Sequence++;
+                    }
+                }
+                else if (direction == "down")
+                {
+                    if (currentIndex < productImages.Count - 1)
+                    {
+                        productImages[currentIndex].Sequence++;
+                        productImages[currentIndex + 1].Sequence--;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", new { id = image.VariantId, ProductId = image.ProductId });
+        }
     }
 }

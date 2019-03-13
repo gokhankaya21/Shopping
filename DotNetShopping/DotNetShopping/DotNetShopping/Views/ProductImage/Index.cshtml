@@ -3,11 +3,8 @@
     ViewBag.Title = "ProductImage";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <h2>Product Images</h2>
-
 <div class="error">@Request.QueryString["Error"]</div>
-
 <p>
     @Html.ActionLink("Create New", "PhotoAdd", new { id = Model.First().VariantId, ProductId = Model.First().ProductId })
 </p>
@@ -38,24 +35,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
-            <td style="text-align:center;">
-                <div><img src="~/images/up.png" /></div>
-                <div><img src="~/images/down.png" /></div>
-                <div>@Html.DisplayFor(modelItem => item.Sequence)</div>
-            </td>
             <td>
-                
+                <div style="display:table">
+                    <div style="display:table-cell;vertical-align:middle;">@Html.DisplayFor(modelItem => item.Sequence)</div>
+                    <div style="padding-left:10px;display:grid">
+                        <img src="~/images/up.png" style="cursor:pointer" onclick="arrowClick('up',@item.ImageId);" />
+                        <img src="~/images/down.png" style="cursor:pointer" onclick="arrowClick('down',@item.ImageId);" />
+                    </div>
+                </div>
             </td>
+            <td></td>
             <td>
                 @Html.ActionLink("Delete", "Delete", new { id = item.ImageId, VariantId = item.VariantId }, new { @class = "deleteImage" })
-
             </td>
         </tr>
     }
-
 </table>
 @section scriptsready{
     $('.deleteImage').click(function(){
     return confirm("Are you sure you want to delete this photo?");
     })
+}
+@section scripts{
+    <script type="text/javascript">
+        function arrowClick(direction, imageId) {
+            window.location = '/ProductImage/Sequence?direction=' + direction + '&imageId=' + imageId;
+        }
+    </script>
 }

@@ -259,23 +259,26 @@ namespace DotNetShopping.Controllers
                             var productImage = new ProductImage();
                             string fileName = productImage.InsertProductImage(variant.VariantId);
                             ImageHelper.SaveImage(fileName, image);
+                            return RedirectToAction("Index");
                         }
-                        return RedirectToAction("Index");
+                        else
+                        {
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                        }
                     }
                     else
                     {
-                        throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                        throw new Exception("Photo needed");
                     }
-                    
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View(model);
             }
         }
-    
+
 
         public ActionResult VariantEdit(Int64 id)
         {
