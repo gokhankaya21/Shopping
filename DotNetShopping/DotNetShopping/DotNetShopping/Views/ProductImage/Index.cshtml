@@ -7,19 +7,22 @@
 <h2>Product Images</h2>
 
 <div class="error">@Request.QueryString["Error"]</div>
+
 <p>
     @Html.ActionLink("Create New", "PhotoAdd", new { id = Model.First().VariantId, ProductId = Model.First().ProductId })
 </p>
 <table class="table">
     <tr>
-        <th></th>
+        <th>
+            <b style="font-size:11pt;">Photo</b>
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FileName)
         </th>
-        <th>
+        <th style="text-align:center;">
             @Html.DisplayNameFor(model => model.Sequence)
         </th>
-
+        <th></th>
         <th></th>
     </tr>
 
@@ -35,12 +38,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sequence)
+            <td style="text-align:center;">
+                <div><img src="~/images/up.png" /></div>
+                <div><img src="~/images/down.png" /></div>
+                <div>@Html.DisplayFor(modelItem => item.Sequence)</div>
             </td>
-
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ImageId }, new { @class = "deleteImage" }) |
+                
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ImageId, VariantId = item.VariantId }, new { @class = "deleteImage" })
 
             </td>
         </tr>

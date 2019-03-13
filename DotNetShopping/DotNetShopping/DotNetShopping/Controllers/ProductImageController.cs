@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace DotNetShopping.Controllers
 {
@@ -12,10 +13,18 @@ namespace DotNetShopping.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: ProductImage
-        public ActionResult Index(Int64 id)
+        public ActionResult Index(Int64 id, Int64 ProductId)
         {
-            var images = db.ProductImages.Where(x => x.VariantId == id).OrderBy(x => x.Sequence);
-            return View(images.ToList());
+            var images = db.ProductImages.Where(x => x.VariantId == id).OrderBy(x => x.Sequence).ToList();
+            if (images.Count == 0)
+            {
+                return RedirectToAction("PhotoAdd", new { id = id, ProductId = ProductId });
+            }
+            else
+            {
+                return View(images);
+            }
+
         }
         public ActionResult PhotoAdd(Int64 id, Int64 ProductId)
         {
@@ -55,6 +64,30 @@ namespace DotNetShopping.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View(model);
+            }
+        }
+        public ActionResult Delete(Int64 id, Int64 VariantId)
+        {
+            try
+            {
+                var image = db.ProductImages.Find(id);
+                if (image != null)
+                {
+                    string fileName = image.FileName;
+                    string path = Server.MapPath("~/ProductImage/" + fileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    db.ProductImages.Remove(image);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", new { id = VariantId });
+                }
+                throw new Exception("Product Image Not Found");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", new { id = VariantId, Error = ex.Message });
             }
         }
     }

@@ -54,39 +54,58 @@ namespace DotNetShopping.Controllers
         {
             try
             {
-                var today = DateTime.Today;
-                var p = new Product();
-                p.Name = model.ProductName;
-                p.BrandId = model.BrandId;
-                p.Archived = false;
-                p.CategoryId = model.CategoryId;
-                p.CreateDate = today;
-                p.CreateUser = User.Identity.GetUserId();
-                p.UpdateDate = today;
-                p.UpdateUser = User.Identity.GetUserId();
-                p.Unit = model.Unit;
-                p.SupplierId = model.SupplierId;
-                p.OnSale = model.OnSale;
-                p.IsVisible = model.IsVisible;
-                p.Description = model.Description;
-                db.Products.Add(p);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    if (model.UploadedFile != null)
+                    {
+                        var image = System.Drawing.Image.FromStream(model.UploadedFile.InputStream);
+                        if (image.Width >= 1000 && image.Height >= 1000)
+                        {
+                            var today = DateTime.Today;
+                            var p = new Product();
+                            p.Name = model.ProductName;
+                            p.BrandId = model.BrandId;
+                            p.Archived = false;
+                            p.CategoryId = model.CategoryId;
+                            p.CreateDate = today;
+                            p.CreateUser = User.Identity.GetUserId();
+                            p.UpdateDate = today;
+                            p.UpdateUser = User.Identity.GetUserId();
+                            p.Unit = model.Unit;
+                            p.SupplierId = model.SupplierId;
+                            p.OnSale = model.OnSale;
+                            p.IsVisible = model.IsVisible;
+                            p.Description = model.Description;
+                            db.Products.Add(p);
+                            db.SaveChanges();
 
-                var v = new Variant();
-                v.ProductId = p.ProductId;
-                v.Archived = false;
-                v.Cost = model.Cost;
-                v.CreateDate = today;
-                v.CreateUser = User.Identity.GetUserId();
-                v.UpdateDate = today;
-                v.UpdateUser = User.Identity.GetUserId();
-                v.IsVisible = model.IsVisible;
-                v.Name = model.VariantName;
-                v.Stock = model.Stock;
-                v.UnitPrice = model.UnitPrice;
-                db.Variants.Add(v);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                            var v = new Variant();
+                            v.ProductId = p.ProductId;
+                            v.Archived = false;
+                            v.Cost = model.Cost;
+                            v.CreateDate = today;
+                            v.CreateUser = User.Identity.GetUserId();
+                            v.UpdateDate = today;
+                            v.UpdateUser = User.Identity.GetUserId();
+                            v.IsVisible = model.IsVisible;
+                            v.Name = model.VariantName;
+                            v.Stock = model.Stock;
+                            v.UnitPrice = model.UnitPrice;
+                            db.Variants.Add(v);
+                            db.SaveChanges();
+
+                            var productImage = new ProductImage();
+                            string fileName = productImage.InsertProductImage(v.VariantId);
+                            ImageHelper.SaveImage(fileName, image);
+
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -165,22 +184,30 @@ namespace DotNetShopping.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Variants(Int64 id)
+        public ActionResult Variants(Int64 id = 0)
         {
-            var model = db.Variants.Where(x => x.ProductId == id && !x.Archived)
-                .Select(x => new VariantListModel
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
 
-                {
-                    VariantId = x.VariantId,
-                    VariantName = x.Name,
-                    Cost = x.Cost,
-                    IsVisible = x.IsVisible,
-                    ProductId = x.ProductId,
-                    Stock = x.Stock,
-                    UnitPrice = x.UnitPrice,
-                    PhotoName = db.ProductImages.Where(i => i.VariantId == x.VariantId).OrderBy(i => i.Sequence).FirstOrDefault().FileName
-                });
-            return View(model);
+                var model = db.Variants.Where(x => x.ProductId == id && !x.Archived)
+                    .Select(x => new VariantListModel
+
+                    {
+                        VariantId = x.VariantId,
+                        VariantName = x.Name,
+                        Cost = x.Cost,
+                        IsVisible = x.IsVisible,
+                        ProductId = x.ProductId,
+                        Stock = x.Stock,
+                        UnitPrice = x.UnitPrice,
+                        PhotoName = db.ProductImages.Where(i => i.VariantId == x.VariantId).OrderBy(i => i.Sequence).FirstOrDefault().FileName
+                    });
+                return View(model);
+            }
         }
 
         public ActionResult VariantCreate(Int64 id)
@@ -201,29 +228,54 @@ namespace DotNetShopping.Controllers
         [HttpPost]
         public ActionResult VariantCreate(VariantCreateModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    if (model.UploadedFile != null)
+                    {
+                        var image = System.Drawing.Image.FromStream(model.UploadedFile.InputStream);
+                        if (image.Width >= 1000 && image.Height >= 1000)
+                        {
+                            var today = DateTime.Today;
+                            var variant = new Variant();
+                            variant.ProductId = model.ProductId;
+                            variant.Name = model.VariantName;
+                            variant.IsVisible = model.IsVisible;
+                            variant.Stock = model.Stock;
+                            variant.UnitPrice = model.UnitPrice;
+                            variant.Cost = model.Cost;
+                            variant.CreateDate = today;
+                            variant.UpdateDate = today;
+                            variant.CreateUser = User.Identity.GetUserId();
+                            variant.UpdateUser = User.Identity.GetUserId();
+                            db.Variants.Add(variant);
+                            db.SaveChanges();
+
+                            var productImage = new ProductImage();
+                            string fileName = productImage.InsertProductImage(variant.VariantId);
+                            ImageHelper.SaveImage(fileName, image);
+                        }
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                    }
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
                 return View(model);
             }
-            else
-            {
-                var today = DateTime.Today;
-                var variant = new Variant();
-                variant.ProductId = model.ProductId;
-                variant.Name = model.VariantName;
-                variant.IsVisible = model.IsVisible;
-                variant.Stock = model.Stock;
-                variant.UnitPrice = model.UnitPrice;
-                variant.CreateDate = today;
-                variant.UpdateDate = today;
-                variant.CreateUser = User.Identity.GetUserId();
-                variant.UpdateUser = User.Identity.GetUserId();
-                db.Variants.Add(variant);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
         }
-
+    
 
         public ActionResult VariantEdit(Int64 id)
         {
@@ -275,6 +327,6 @@ namespace DotNetShopping.Controllers
             db.SaveChanges();
             return RedirectToAction("Variants", new { id = variant.ProductId });
         }
-       
+
     }
 }

@@ -289,6 +289,7 @@
     <Content Include="Content\fonts\Pe-icon-7-stroke.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site\Site.css" />
+    <Content Include="images\down.png" />
     <Content Include="images\newsletter.jpg" />
     <Content Include="images\page-header.jpg" />
     <Content Include="images\payment-icon.png" />
@@ -313,6 +314,7 @@
     <Content Include="images\sidebar-5.jpg" />
     <Content Include="images\slider\slide1.jpg" />
     <Content Include="images\slider\slide2.jpg" />
+    <Content Include="images\up.png" />
     <Content Include="Scripts\bootstrap-notify.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Content\fonts\Pe-icon-7-stroke.eot" />

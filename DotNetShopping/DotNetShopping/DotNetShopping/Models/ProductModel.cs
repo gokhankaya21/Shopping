@@ -66,6 +66,7 @@ namespace DotNetShopping.Models
         public Decimal UnitPrice { get; set; }
         public Decimal Cost { get; set; }
         public Int16 Stock { get; set; }
+        public HttpPostedFileBase UploadedFile { get; set; }
     }
     public class ProductEditModel
     {

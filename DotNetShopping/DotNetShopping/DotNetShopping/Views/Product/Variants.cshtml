@@ -61,8 +61,8 @@
             <td>
                 @Html.ActionLink("Edit", "VariantEdit", new { id = item.VariantId }) |
                 @Html.ActionLink("Delete", "VariantDelete", new { id = item.VariantId }, new { @class = "deleteVariant" }) |
-                @Html.ActionLink("AddPhoto", "PhotoAdd","ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" }) |
-                @Html.ActionLink("Photos", "Index","ProductImage", new { id = item.VariantId}, new { @class = "photos" })
+                @Html.ActionLink("AddPhoto", "PhotoAdd", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" }) |
+                @Html.ActionLink("Photos", "Index", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" })
             </td>
         </tr>
     }
