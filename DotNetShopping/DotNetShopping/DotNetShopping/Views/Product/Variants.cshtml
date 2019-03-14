@@ -15,64 +15,71 @@
     @Html.ActionLink("Create New", "VariantCreate", new { id = Model.First().ProductId })
 </p>
 <table class="table">
-    <tr>
-        <th>
-
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VariantName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsVisible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                <img src="~/ProductImage/@item.PhotoName" width="200" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VariantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsVisible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "VariantEdit", new { id = item.VariantId }) |
-                @Html.ActionLink("Delete", "VariantDelete", new { id = item.VariantId }, new { @class = "deleteVariant" }) |
-                @Html.ActionLink("AddPhoto", "PhotoAdd", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" }) |
-                @Html.ActionLink("Photos", "Index", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" })
-            </td>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VariantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsVisible)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/ProductImage/@item.PhotoName" width="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VariantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsVisible)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "VariantEdit", new { id = item.VariantId }) |
+                    @Html.ActionLink("Delete", "VariantDelete", new { id = item.VariantId }, new { @class = "deleteVariant" }) |
+                    @Html.ActionLink("AddPhoto", "PhotoAdd", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" }) |
+                    @Html.ActionLink("Photos", "Index", "ProductImage", new { id = item.VariantId, ProductId = item.ProductId }, new { @class = "photos" })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
-
+@section head{
+    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+@section scripts{
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+}
 @section scriptsready{
-    $('.deleteProduct').click(function(){
-    return confirm("Are you sure you want to delete this product?");
-    })
+    $('.table').DataTable();
+
     $('.deleteVariant').click(function(){
     return confirm("Are you sure you want to delete this variant?");
     })

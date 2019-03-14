@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -477,6 +478,7 @@
     <Content Include="Views\Product\Variants.cshtml" />
     <Content Include="Views\ProductImage\PhotoAdd.cshtml" />
     <Content Include="Views\ProductImage\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
