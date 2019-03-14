@@ -15,8 +15,29 @@ namespace DotNetShopping.Controllers
         // GET: User
         public ActionResult Index()
         {
-            var users = db.Users.Include("Roles").ToList();
+            var users = db.Users.Select(x => new
+            {
+                UserId = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                RoleNames = x.Roles.Join(db.Roles, u => u.RoleId, r => r.Id, (u, r) => new { u, r }).Select(ur => ur.r.Name).ToList()
+            }).ToList().Select(x => new UserListModel
+            {
+                Email = x.Email,
+                UserId = x.UserId,
+                Roles = string.Join(",", x.RoleNames)
+            }).ToList();
             return View(users);
+        }
+        public ActionResult Edit(string UserId)
+        {
+            var user = db.Users.Find(UserId);
+            return View(user);
+        }
+        public ActionResult Roles()
+        {
+            var roles = db.Roles.OrderBy(x => x.Name).ToList();
+            return View(roles);
         }
     }
 }

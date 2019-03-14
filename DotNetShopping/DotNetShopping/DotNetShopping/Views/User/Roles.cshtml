@@ -1,18 +1,18 @@
-﻿@model IEnumerable<DotNetShopping.Models.UserListModel>
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Users</h2>
-@Html.ActionLink("Roles", "Roles")
+<h2>Roles</h2>
+@Html.ActionLink("Users", "Index")
+@Html.ActionLink("Create New", "Create")
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -21,19 +21,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Roles)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId })
+                    @Html.ActionLink("Delete", "DeleteRole", new { id = item.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 @section head{
     <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 }
@@ -43,4 +39,3 @@
 @section scriptsready{
     $('.table').DataTable();
 }
-
