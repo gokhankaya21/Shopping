@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201903121257485_imagesequence.Designer.cs">
       <DependentUpon>201903121257485_imagesequence.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903151636302_userdates.cs" />
+    <Compile Include="Migrations\201903151636302_userdates.Designer.cs">
+      <DependentUpon>201903151636302_userdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
@@ -549,6 +553,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903121257485_imagesequence.resx">
       <DependentUpon>201903121257485_imagesequence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151636302_userdates.resx">
+      <DependentUpon>201903151636302_userdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DotNetShopping.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DotNetShopping.Controllers
 {
@@ -79,6 +80,7 @@ namespace DotNetShopping.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    UpdateUserLoginTime(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -155,6 +157,7 @@ namespace DotNetShopping.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UpdateUserRegistrationDate(user.Id);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -424,6 +427,25 @@ namespace DotNetShopping.Controllers
         }
 
         #region Helpers
+
+        private void UpdateUserLoginTime(string Email)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Where(x=>x.Email==Email).FirstOrDefault();
+            if (user != null)
+            {
+                user.LastLoginTime = DateTime.Now;
+                db.SaveChanges();
+            }
+        }
+        private void UpdateUserRegistrationDate(string UserId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(UserId);
+            user.RegistrationDate = DateTime.Now;
+            user.LastLoginTime = DateTime.Now;
+            db.SaveChanges();
+        }
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

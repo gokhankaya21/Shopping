@@ -10,9 +10,9 @@ using System.Web.Mvc;
 
 namespace DotNetShopping.Controllers
 {
-    public class User : Controller
+    public class UserController : Controller
     {
-        private IdentityDbContext db = new IdentityDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: User
         public ActionResult Index()
@@ -22,11 +22,15 @@ namespace DotNetShopping.Controllers
                 UserId = x.Id,
                 UserName = x.UserName,
                 Email = x.Email,
+                LastLogin=x.LastLoginTime,
+                RegisterDate=x.RegistrationDate,
                 RoleNames = x.Roles.Join(db.Roles, u => u.RoleId, r => r.Id, (u, r) => new { u, r }).Select(ur => ur.r.Name).ToList()
             }).ToList().Select(x => new UserListModel
             {
                 Email = x.Email,
                 UserId = x.UserId,
+                LastLoginTime=x.LastLogin,
+                RegistrationDate=x.RegisterDate,
                 Roles = string.Join(", ", x.RoleNames)
             }).ToList();
             return View(users);
