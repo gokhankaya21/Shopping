@@ -37,7 +37,7 @@ namespace DotNetShopping.Models
                 db.SaveChanges();
 
                 fileName = variant.Name + "_" + variant.Product.Name + "_" + productImage.ImageId;
-                fileName = StringHelper.ClearFileName(fileName) + ".jpg";
+                fileName = StringHelper.ClearFileName(fileName);
                 productImage.FileName = fileName;
 
                 Int16 sequence = db.ProductImages.Where(x => x.ProductId == variant.ProductId && x.VariantId == variant.VariantId).OrderByDescending(x => x.Sequence).FirstOrDefault().Sequence;
