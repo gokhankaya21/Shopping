@@ -38,7 +38,7 @@ namespace DotNetShopping.Models
         public Int16 CategoryId { get; set; }
         public string Description { get; set; }
         public ProductUnit Unit { get; set; }
-        
+
         public DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }
         public DateTime UpdateDate { get; set; }
@@ -95,8 +95,21 @@ namespace DotNetShopping.Models
         public bool OnSale { get; set; }
         public bool IsVisible { get; set; }
         public Decimal Cost { get; set; }
-        public Decimal UnitPrice { get; set; }        
+        public Decimal UnitPrice { get; set; }
         public Int16 Stock { get; set; }
+        public string PhotoName { get; set; }
+    }
+    public class ProductBoxModel
+    {
+        public Int64 ProductId { get; set; }
+        public Int64 VariantId { get; set; }
+        [Display(Name = "Product Name")]
+        public string ProductName { get; set; }
+        [Display(Name = "Variant Name")]
+        public string VariantName { get; set; }
+        public string BrandName { get; set; }
+        public string CategoryName { get; set; }
+        public Decimal UnitPrice { get; set; }
         public string PhotoName { get; set; }
     }
 }

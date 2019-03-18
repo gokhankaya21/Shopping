@@ -1,4 +1,5 @@
-﻿<div class="owl-item" style="width: 240px;">
+﻿@model DotNetShopping.Models.ProductBoxModel
+<div class="owl-item" style="width: 240px;">
     <div class="item">
         <div class="item-area">
             <div class="product-image-area">
@@ -9,28 +10,28 @@
                 </div>
                 <a href="" class="quickview-icon"><i class="icon-export"></i><span>Quick View</span></a>
                 <a href="" title="Sheer Blouse - Black" class="product-image">
-                    <img class="porto-lazyload porto-lazyload-loaded" data-src="/images/products/p1.jpg" style="display: inline;" src="~/images/products/p1.jpg">
+                    <img class="porto-lazyload porto-lazyload-loaded" data-src="~/ProductImage/@Model.PhotoName" style="display: inline;width:100%;height:100%" src="~/ProductImage/@Model.PhotoName">
                 </a>
                 <div class="product-label"><span class="sale-product-icon">-10%</span></div>
             </div>
             <div class="details-area">
-                <h2 class="product-name"><a href="" title="Sheer Blouse - Black">Sheer Blouse - Black</a></h2>
+                <h2 class="product-name"><a href="" title="@Model.VariantName-@Model.ProductName">@Model.VariantName-@Model.ProductName</a></h2>
                 <div class="ratings">
                     <div class="rating-box">
                         <div class="rating" style="width:0"></div>
                     </div>
                 </div>
                 <div class="price-box">
-                    <p class="old-price">
+                    @*<p class="old-price">
                         <span class="price-label">Regular Price:</span>
                         <span class="price" id="old-price-388">
                             $99.00
                         </span>
-                    </p>
+                    </p>*@
                     <p class="special-price">
                         <span class="price-label">Special Price</span>
                         <span class="price" id="product-price-388">
-                            $89.00
+                            @Model.UnitPrice
                         </span>
                     </p>
                 </div>
