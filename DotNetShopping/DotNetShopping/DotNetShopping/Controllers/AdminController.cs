@@ -34,10 +34,11 @@ namespace DotNetShopping.Controllers
                 var role = new IdentityRole();
                 role.Name = "Admin";
                 roleManager.Create(role);
-
+            }
                 //Here we create a Admin super user who will maintain the website                   
-                var user = UserManager.FindByEmail("semih_ahmet123@outlook.com");
-
+                var user = UserManager.FindByEmail("huseyin@avniyalcin.com");
+            if (user != null)
+            {
                 var result1 = UserManager.AddToRole(user.Id, "Admin");
             }
 

@@ -18,15 +18,13 @@ namespace DotNetShopping.Models
         public string Name { get; set; }
         [HiddenInput(DisplayValue = false)]
         public Int16 ParentId { get; set; }
+
     }
     public class CategoryListModel
     {
         public Int16 CategoryId { get; set; }
-
         public string CategoryName { get; set; }
-
         public Int16 ParentId { get; set; }
-
         public string ParentName { get; set; }
     }
 }

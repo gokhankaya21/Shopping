@@ -18,7 +18,8 @@ namespace DotNetShopping.Models
         public string Name { get; set; }
 
         [ForeignKey("Product")]
-        public Int64 ProductId { get; set; }
+        public Int64 ProductId { get; set; 
+}
         public Product Product { get; set; }
 
         public Decimal UnitPrice { get; set; }
@@ -35,7 +36,6 @@ namespace DotNetShopping.Models
     }
     public class VariantCreateModel
     {
-
         [Display(Name = "Variant Name")]
         public string VariantName { get; set; }
         public Int64 ProductId { get; set; }

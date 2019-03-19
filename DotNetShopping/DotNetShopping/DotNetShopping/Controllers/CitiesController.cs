@@ -16,29 +16,27 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Cities
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var cities = db.Cities.Include(c => c.Country)
-               .GroupJoin(db.States, c => c.StateId, s => s.StateId, (c, s) => new { City = c, State = s })
-               .SelectMany(
-                       x => x.State.DefaultIfEmpty(),
-                       (x, y) => new { City = x.City, State = y })
-           .Select(cs => new CityListModel
-           {
-               CityId = cs.City.CityId,
-               Name = cs.City.Name,
-               Code = cs.City.Code,
-               StateId = cs.City.StateId,
-               StateName = cs.State.Name ?? "No State",
-               CountryId = cs.City.CountryId,
-               CountryName = cs.City.Country.Name
-           });
+                .GroupJoin(db.States, c => c.StateId, s => s.StateId, 
+                (c, s) => new {City = c, State = s})
+                .SelectMany(
+                        x => x.State.DefaultIfEmpty(),
+                        (x, y) => new { City = x.City, State = y })
+               .Select(cs => new CityListModel{
+                   CityId = cs.City.CityId,
+                   Name = cs.City.Name,
+                   Code = cs.City.Code,
+                   StateId = cs.City.StateId,
+                   StateName = cs.State.Name ?? "No State",
+                   CountryId = cs.City.CountryId,
+                   CountryName = cs.City.Country.Name
+               });
             return View(await cities.ToListAsync());
         }
 
         // GET: Cities/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(short? id)
         {
             if (id == null)
@@ -54,18 +52,16 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Cities/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var states = db.States.OrderBy(x => x.Name).ToList();
-            states.Insert(0, new State { Name = "No State" });
+            states.Insert(0, new State { Name = "No State" });           
             ViewBag.StateId = new SelectList(states, "StateId", "Name");
             ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name");
             return View();
         }
 
         // POST: Cities/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -80,13 +76,12 @@ namespace DotNetShopping.Controllers
             }
             var states = db.States.OrderBy(x => x.Name).ToList();
             states.Insert(0, new State { Name = "No State" });
-            ViewBag.StateId = new SelectList(states, "StateId", "Name",city.StateId);
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Name", city.CountryId);
+            ViewBag.StateId = new SelectList(states, "StateId", "Name", city.StateId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", city.CountryId);
             return View(city);
         }
 
         // GET: Cities/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(short? id)
         {
             if (id == null)
@@ -101,12 +96,11 @@ namespace DotNetShopping.Controllers
             var states = db.States.OrderBy(x => x.Name).ToList();
             states.Insert(0, new State { Name = "No State" });
             ViewBag.StateId = new SelectList(states, "StateId", "Name", city.StateId);
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Name", city.CountryId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", city.CountryId);
             return View(city);
         }
 
         // POST: Cities/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,12 +116,11 @@ namespace DotNetShopping.Controllers
             var states = db.States.OrderBy(x => x.Name).ToList();
             states.Insert(0, new State { Name = "No State" });
             ViewBag.StateId = new SelectList(states, "StateId", "Name", city.StateId);
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Name", city.CountryId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", city.CountryId);
             return View(city);
         }
 
         // GET: Cities/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(short? id)
         {
             if (id == null)
@@ -143,7 +136,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Cities/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(short id)

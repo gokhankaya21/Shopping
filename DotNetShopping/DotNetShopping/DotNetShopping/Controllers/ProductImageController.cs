@@ -2,10 +2,11 @@
 using DotNetShopping.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
-using System.IO;
 
 namespace DotNetShopping.Controllers
 {
@@ -24,7 +25,7 @@ namespace DotNetShopping.Controllers
             {
                 return View(images);
             }
-
+            
         }
         public ActionResult PhotoAdd(Int64 id, Int64 ProductId)
         {
@@ -36,7 +37,7 @@ namespace DotNetShopping.Controllers
         }
 
         [HttpPost]
-        public ActionResult PhotoAdd(PhotoAddModel model)
+        public ActionResult PhotoAdd(PhotoAddModel model,Int64 ProductId)
         {
             ViewBag.Error = "";
             try
@@ -54,11 +55,11 @@ namespace DotNetShopping.Controllers
                         }
                         else
                         {
-                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size!");
                         }
                     }
                 }
-                return RedirectToAction("Index", new { id = model.VariantId });
+                return RedirectToAction("Index", new { id = model.VariantId, ProductId = ProductId });
             }
             catch (Exception ex)
             {
@@ -66,30 +67,45 @@ namespace DotNetShopping.Controllers
                 return View(model);
             }
         }
-        public ActionResult Delete(Int64 id, Int64 VariantId)
+
+        public ActionResult Delete(Int64 id, Int64 VariantId, Int64 ProductId)
         {
             try
             {
-                var image = db.ProductImages.Find(id);
-                if (image != null)
+                var productImage = db.ProductImages.Find(id);
+                if (productImage != null)
                 {
-                    string fileName = image.FileName;
-                    string path = Server.MapPath("~/ProductImage/" + fileName);
+                    db.ProductImages.Remove(productImage);
+                    db.SaveChanges();
+
+                    string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/ProductImage"), productImage.FileName + ".jpg");
                     if (System.IO.File.Exists(path))
                     {
                         System.IO.File.Delete(path);
                     }
-                    db.ProductImages.Remove(image);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", new { id = VariantId });
+                    for (int i = 1; i <= 10; i++)
+                    {
+                        DeleteForSize(productImage, productImage.FileName, i);
+                    }
+                    return RedirectToAction("Index", new { id = VariantId, ProductId = ProductId });
                 }
-                throw new Exception("Product Image Not Found");
+                throw new Exception("Product Image Not Found!");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                return RedirectToAction("Index", new { id = VariantId, Error = ex.Message });
+                return RedirectToAction("Index", new { id = VariantId, ProductId = ProductId, Error = ex.Message });
             }
         }
+
+        private static void DeleteForSize(ProductImage productImage, string name, int i)
+        {
+            string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/ProductImage"), name + "-" + i + ".jpg");
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+        }
+
         public ActionResult Sequence(string direction, Int64 imageId)
         {
             var image = db.ProductImages.Find(imageId);
@@ -109,17 +125,18 @@ namespace DotNetShopping.Controllers
                         currentIndex = i;
                     }
                 }
+                
                 if (direction == "up")
                 {
                     if (currentIndex > 0)
                     {
                         productImages[currentIndex].Sequence--;
-                        productImages[currentIndex - 1].Sequence++;
+                        productImages[currentIndex-1].Sequence++;
                     }
                 }
                 else if (direction == "down")
                 {
-                    if (currentIndex < productImages.Count - 1)
+                    if (currentIndex < productImages.Count-1)
                     {
                         productImages[currentIndex].Sequence++;
                         productImages[currentIndex + 1].Sequence--;

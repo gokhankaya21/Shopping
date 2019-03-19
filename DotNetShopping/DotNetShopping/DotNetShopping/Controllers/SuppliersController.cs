@@ -46,11 +46,11 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Suppliers/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "SupplierId,Name,Phone,Email")] Supplier supplier)
         {
             if (ModelState.IsValid)
@@ -80,11 +80,11 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Suppliers/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "SupplierId,Name,Phone,Email")] Supplier supplier)
         {
             if (ModelState.IsValid)
@@ -113,9 +113,9 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Suppliers/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(short id)
         {
             Supplier supplier = await db.Suppliers.FindAsync(id);

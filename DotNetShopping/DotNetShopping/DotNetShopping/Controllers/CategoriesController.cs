@@ -16,10 +16,13 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
-            var categories = db.Categories.GroupJoin(db.Categories, c => c.ParentId, p => p.CategoryId, (c, p) => new { Category = c, p }).SelectMany(x => x.p.DefaultIfEmpty(), (c, p) => new { c, p })
+            var categories = db.Categories
+                .GroupJoin(db.Categories, c => c.ParentId, p => p.CategoryId, 
+                (c, p) => new { Category = c, p })
+                .SelectMany(x => x.p.DefaultIfEmpty(),
+                (c, p) => new { c, p })
                 .Select(cp => new CategoryListModel
                 {
                     CategoryId = cp.c.Category.CategoryId,
@@ -31,7 +34,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Categories/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(short? id)
         {
             if (id == null)
@@ -47,7 +49,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Categories/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var categories = db.Categories.OrderBy(x => x.Name).ToList();
@@ -57,7 +58,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Categories/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -77,7 +77,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Categories/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(short? id)
         {
             if (id == null)
@@ -96,7 +95,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Categories/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +114,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Categories/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(short? id)
         {
             if (id == null)
@@ -133,7 +130,6 @@ namespace DotNetShopping.Controllers
 
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(short id)
         {

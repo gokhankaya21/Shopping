@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<DotNetShopping.Models.ProductImage>
+
 @{
     ViewBag.Title = "ProductImage";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<h2>Product Images</h2>
+
+<h2>ProductImage</h2>
+
 <div class="error">@Request.QueryString["Error"]</div>
 <p>
     @Html.ActionLink("Create New", "PhotoAdd", new { id = Model.First().VariantId, ProductId = Model.First().ProductId })
 </p>
 <table class="table">
     <tr>
-        <th>
-            <b style="font-size:11pt;">Photo</b>
-        </th>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.FileName)
         </th>
-        <th style="text-align:center;">
+        <th>
             @Html.DisplayNameFor(model => model.Sequence)
         </th>
-        <th></th>
         <th></th>
     </tr>
 
@@ -29,36 +29,38 @@
             <td>
                 @if (item.FileName != "")
                 {
-                    <img src="~/ProductImage/@item.FileName" width="200" />
+                    <img src="~/ProductImage/@(item.FileName)-2.jpg" />
                 }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
             <td>
-                <div style="display:table">
-                    <div style="display:table-cell;vertical-align:middle;">@Html.DisplayFor(modelItem => item.Sequence)</div>
-                    <div style="padding-left:10px;display:grid">
-                        <img src="~/images/up.png" style="cursor:pointer" onclick="arrowClick('up',@item.ImageId);" />
-                        <img src="~/images/down.png" style="cursor:pointer" onclick="arrowClick('down',@item.ImageId);" />
+                <div style="display:table;">
+                    <div style="display:table-cell; vertical-align:middle;">@Html.DisplayFor(modelItem => item.Sequence)</div>
+                    <div style="padding-left:10px; display:grid;">
+                        <img src="~/images/up.png" style="cursor:pointer;" onclick="arrowClick('up', @item.ImageId);" />
+                        <img src="~/images/down.png" style="cursor:pointer;" onclick="arrowClick('down', @item.ImageId);" />
                     </div>
                 </div>
             </td>
-            <td></td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ImageId, VariantId = item.VariantId }, new { @class = "deleteImage" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ImageId, VariantId = item.VariantId, ProductId = item.ProductId }, new { @class = "deleteImage" })
             </td>
         </tr>
     }
+
 </table>
-@section scriptsready{
+@section scriptsready {
     $('.deleteImage').click(function(){
-    return confirm("Are you sure you want to delete this photo?");
+    return confirm("Are you sure you want to delete this Photo?");
     })
 }
-@section scripts{
+@section scripts {
     <script type="text/javascript">
-        function arrowClick(direction, imageId) {
+        function arrowClick(direction, imageId)
+        {
+            //alert(direction);
             window.location = '/ProductImage/Sequence?direction=' + direction + '&imageId=' + imageId;
         }
     </script>

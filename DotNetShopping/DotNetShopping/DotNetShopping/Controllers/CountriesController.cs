@@ -16,14 +16,12 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Countries
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             return View(await db.Countries.ToListAsync());
         }
 
         // GET: Countries/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(short? id)
         {
             if (id == null)
@@ -39,14 +37,12 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Countries/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Countries/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -64,7 +60,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Countries/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(short? id)
         {
             if (id == null)
@@ -80,7 +75,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Countries/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -97,7 +91,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: Countries/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(short? id)
         {
             if (id == null)
@@ -113,7 +106,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Countries/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(short id)

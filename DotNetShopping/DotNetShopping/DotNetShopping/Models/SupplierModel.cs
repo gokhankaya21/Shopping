@@ -13,17 +13,15 @@ namespace DotNetShopping.Models
         [HiddenInput(DisplayValue = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Int16 SupplierId { get; set; }
-
         [Required]
         [Display(Name = "Supplier Name")]
         public string Name { get; set; }
-
         [Required]
         [Phone]
         public string Phone { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        
     }
 }

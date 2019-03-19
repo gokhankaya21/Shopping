@@ -10,10 +10,10 @@
 <p style="float:left;">
     @Html.ActionLink("Create New", "Create")
 </p>
-<p style="float:right; padding-left:20px;">
+<p style="float:right; padding-right:20px;">
     @Html.ActionLink("Countries", "Index", "Countries")
 </p>
-<p style="float:right; padding-left:20px;">
+<p style="float:right; padding-right:20px">
     @Html.ActionLink("States", "Index", "States")
 </p>
 <table class="table">
@@ -29,7 +29,7 @@
                 @Html.DisplayNameFor(model => model.Code)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StateId)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th></th>
         </tr>
@@ -48,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.Code)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StateId)
+                    @Html.DisplayFor(modelItem => item.StateName)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.CityId }) |
@@ -58,10 +58,9 @@
             </tr>
         }
     </tbody>
-
 </table>
 @section head{
-    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 }
 @section scripts{
     <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

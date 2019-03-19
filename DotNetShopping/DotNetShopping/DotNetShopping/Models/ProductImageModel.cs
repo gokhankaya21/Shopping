@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DotNetShopping.Helper;
+using DotNetShopping.Helpers;
 
 namespace DotNetShopping.Models
 {
@@ -29,7 +29,6 @@ namespace DotNetShopping.Models
             var variant = db.Variants.Include("Product").Where(x => x.VariantId == VariantId).FirstOrDefault();
             if (variant != null)
             {
-
                 var productImage = new ProductImage();
                 productImage.ProductId = variant.ProductId;
                 productImage.VariantId = variant.VariantId;
@@ -39,7 +38,6 @@ namespace DotNetShopping.Models
                 fileName = variant.Name + "_" + variant.Product.Name + "_" + productImage.ImageId;
                 fileName = StringHelper.ClearFileName(fileName);
                 productImage.FileName = fileName;
-
                 Int16 sequence = db.ProductImages.Where(x => x.ProductId == variant.ProductId && x.VariantId == variant.VariantId).OrderByDescending(x => x.Sequence).FirstOrDefault().Sequence;
                 productImage.Sequence = ++sequence;
 

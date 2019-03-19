@@ -16,8 +16,8 @@ namespace DotNetShopping.Models
             Kilo = 1,
             Liter = 2,
             Meter = 3
-
         }
+
 
 
         [HiddenInput(DisplayValue = false)]
@@ -48,7 +48,9 @@ namespace DotNetShopping.Models
         public bool IsVisible { get; set; }
         public bool Archived { get; set; }
 
+
     }
+
     public class ProductCreateModel
     {
         [Display(Name = "Product Name")]
@@ -60,7 +62,6 @@ namespace DotNetShopping.Models
         public Product.ProductUnit Unit { get; set; }
         public bool OnSale { get; set; }
         public bool IsVisible { get; set; }
-
         [Display(Name = "Variant Name")]
         public string VariantName { get; set; }
         public Decimal UnitPrice { get; set; }
@@ -98,6 +99,7 @@ namespace DotNetShopping.Models
         public Decimal UnitPrice { get; set; }
         public Int16 Stock { get; set; }
         public string PhotoName { get; set; }
+
     }
     public class ProductBoxModel
     {

@@ -46,11 +46,11 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Brands/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create([Bind(Include = "BrandId,Name")] Brand brand)
         {
             if (ModelState.IsValid)
@@ -80,11 +80,11 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Brands/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit([Bind(Include = "BrandId,Name")] Brand brand)
         {
             if (ModelState.IsValid)
@@ -113,9 +113,9 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: Brands/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteConfirmed(short id)
         {
             Brand brand = await db.Brands.FindAsync(id);

@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,26 +12,28 @@ namespace DotNetShopping.Controllers
     public class UserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
         // GET: User
         public ActionResult Index()
         {
             var users = db.Users.Select(x => new
             {
                 UserId = x.Id,
-                UserName = x.UserName,
+                Username = x.UserName,
                 Email = x.Email,
-                LastLogin=x.LastLoginTime,
-                RegisterDate=x.RegistrationDate,
+                LastLogin = x.LastLoginTime,
+                RegisterDate = x.RegistrationDate,
                 RoleNames = x.Roles.Join(db.Roles, u => u.RoleId, r => r.Id, (u, r) => new { u, r }).Select(ur => ur.r.Name).ToList()
-            }).ToList().Select(x => new UserListModel
+            }).ToList()
+            .Select(x => new UserListModel
             {
                 Email = x.Email,
                 UserId = x.UserId,
-                LastLoginTime=x.LastLogin,
-                RegistrationDate=x.RegisterDate,
+                LastLoginTime = x.LastLogin,
+                RegistrationDate = x.RegisterDate,
                 Roles = string.Join(", ", x.RoleNames)
             }).ToList();
+
             return View(users);
         }
         public ActionResult Edit(string UserId)
@@ -60,11 +61,12 @@ namespace DotNetShopping.Controllers
         public ActionResult CreateRole(string RoleName)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+          
 
             if (RoleName != "")
             {
                 if (!roleManager.RoleExists(RoleName))
-                {
+                {  
                     var role = new IdentityRole();
                     role.Name = RoleName;
                     roleManager.Create(role);

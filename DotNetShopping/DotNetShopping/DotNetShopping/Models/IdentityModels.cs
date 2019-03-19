@@ -33,6 +33,7 @@ namespace DotNetShopping.Models
         {
             return new ApplicationDbContext();
         }
+
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Country> Countries { get; set; }

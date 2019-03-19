@@ -3,6 +3,7 @@ using DotNetShopping.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -13,9 +14,8 @@ namespace DotNetShopping.Controllers
     public class ProductController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
-        // GET: Product
-        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var products = db.Products.Include("Brands").Include("Suppliers")
@@ -52,6 +52,7 @@ namespace DotNetShopping.Controllers
         [HttpPost]
         public ActionResult Create(ProductCreateModel model)
         {
+            ViewBag.Error = "";
             try
             {
                 if (ModelState.IsValid)
@@ -94,6 +95,7 @@ namespace DotNetShopping.Controllers
                             db.Variants.Add(v);
                             db.SaveChanges();
 
+
                             var productImage = new ProductImage();
                             string fileName = productImage.InsertProductImage(v.VariantId);
                             ImageHelper.SaveImage(fileName, image);
@@ -102,22 +104,20 @@ namespace DotNetShopping.Controllers
                         }
                         else
                         {
-                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size!");
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ViewBag.Error = ex.Message;
             }
-            var products = db.Products.OrderBy(x => x.Name).ToList();
             ViewBag.SupplierId = new SelectList(db.Suppliers.OrderBy(x => x.Name), "SupplierId", "Name", model.SupplierId);
             ViewBag.BrandId = new SelectList(db.Brands.OrderBy(x => x.Name), "BrandId", "Name", model.BrandId);
             ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
             return View();
         }
-
 
         public ActionResult Edit(Int64 id)
         {
@@ -173,7 +173,6 @@ namespace DotNetShopping.Controllers
                 ViewBag.CategoryId = new SelectList(db.Categories.OrderBy(x => x.Name), "CategoryId", "Name", model.CategoryId);
                 return View(model);
             }
-
         }
 
         public ActionResult Delete(Int64 id)
@@ -192,10 +191,8 @@ namespace DotNetShopping.Controllers
             }
             else
             {
-
                 var model = db.Variants.Where(x => x.ProductId == id && !x.Archived)
                     .Select(x => new VariantListModel
-
                     {
                         VariantId = x.VariantId,
                         VariantName = x.Name,
@@ -209,11 +206,10 @@ namespace DotNetShopping.Controllers
                 return View(model);
             }
         }
-
         public ActionResult VariantCreate(Int64 id)
         {
             var product = db.Products.Find(id);
-            if (product != null)
+            if(product != null)
             {
                 var model = new VariantCreateModel();
                 model.ProductId = id;
@@ -259,26 +255,26 @@ namespace DotNetShopping.Controllers
                             var productImage = new ProductImage();
                             string fileName = productImage.InsertProductImage(variant.VariantId);
                             ImageHelper.SaveImage(fileName, image);
+
                             return RedirectToAction("Index");
                         }
                         else
                         {
-                            throw new Exception("Photo needs to be minimum 1000px X 1000px size");
+                            throw new Exception("Photo needs to be minimum 1000px X 1000px size!");
                         }
                     }
                     else
                     {
-                        throw new Exception("Photo needed");
+                        throw new Exception("photo needed!");
                     }
-                }
+               }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View(model);
             }
         }
-
 
         public ActionResult VariantEdit(Int64 id)
         {
@@ -293,6 +289,7 @@ namespace DotNetShopping.Controllers
                 model.Stock = variant.Stock;
                 model.IsVisible = variant.IsVisible;
                 model.Cost = variant.Cost;
+
                 return View(model);
             }
             else
@@ -307,8 +304,6 @@ namespace DotNetShopping.Controllers
             var variant = db.Variants.Find(model.VariantId);
             if (variant != null)
             {
-                variant.ProductId = model.ProductId;
-                variant.VariantId = model.VariantId;
                 variant.Name = model.VariantName;
                 variant.UnitPrice = model.UnitPrice;
                 variant.Stock = model.Stock;
@@ -331,5 +326,6 @@ namespace DotNetShopping.Controllers
             return RedirectToAction("Variants", new { id = variant.ProductId });
         }
 
+        
     }
 }

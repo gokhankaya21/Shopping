@@ -431,8 +431,8 @@ namespace DotNetShopping.Controllers
         private void UpdateUserLoginTime(string Email)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var user = db.Users.Where(x=>x.Email==Email).FirstOrDefault();
-            if (user != null)
+            var user = db.Users.Where(x => x.Email == Email).FirstOrDefault();
+            if(user != null)
             {
                 user.LastLoginTime = DateTime.Now;
                 db.SaveChanges();

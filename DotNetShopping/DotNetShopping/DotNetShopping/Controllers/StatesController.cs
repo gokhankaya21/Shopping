@@ -16,7 +16,6 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: States
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var states = db.States.Include(s => s.Country);
@@ -24,7 +23,6 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: States/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(short? id)
         {
             if (id == null)
@@ -40,20 +38,18 @@ namespace DotNetShopping.Controllers
         }
 
         // GET: States/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Code");
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name");
             return View();
         }
 
         // POST: States/Create
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "StateId,Name,Code,CountryId")] State state)
+        public async Task<ActionResult> Create([Bind(Include = "StateId,Code,Name,CountryId")] State state)
         {
             if (ModelState.IsValid)
             {
@@ -62,12 +58,11 @@ namespace DotNetShopping.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Code", state.CountryId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", state.CountryId);
             return View(state);
         }
 
         // GET: States/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(short? id)
         {
             if (id == null)
@@ -79,17 +74,16 @@ namespace DotNetShopping.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Code", state.CountryId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", state.CountryId);
             return View(state);
         }
 
         // POST: States/Edit/5
-        [Authorize(Roles = "Admin")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "StateId,Name,Code,CountryId")] State state)
+        public async Task<ActionResult> Edit([Bind(Include = "StateId,Code,Name,CountryId")] State state)
         {
             if (ModelState.IsValid)
             {
@@ -97,12 +91,11 @@ namespace DotNetShopping.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.CountryId = new SelectList(db.Countries, "CountryId", "Code", state.CountryId);
+            ViewBag.CountryId = new SelectList(db.Countries.OrderBy(x => x.Name), "CountryId", "Name", state.CountryId);
             return View(state);
         }
 
         // GET: States/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(short? id)
         {
             if (id == null)
@@ -118,7 +111,6 @@ namespace DotNetShopping.Controllers
         }
 
         // POST: States/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(short id)

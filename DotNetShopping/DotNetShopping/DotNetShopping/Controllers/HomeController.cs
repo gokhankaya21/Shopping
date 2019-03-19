@@ -12,11 +12,13 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var newProducts = db.Variants.Include("Product").Include("Brand").Where(x => x.Archived == false && x.Product.Archived == false && x.IsVisible == true && x.Product.OnSale == true && x.Stock > 0)
-                .Join(db.Categories, v => v.Product.CategoryId, c => c.CategoryId, (v, c) => new { Variant = v, Category = c })
+            var newProducts = db.Variants.Include("Product").Include("Brand")
+                .Where(x => x.Archived == false && x.Product.Archived == false 
+                && x.IsVisible == true && x.Stock > 0 && x.Product.OnSale == true)
+                .Join(db.Categories, v => v.Product.CategoryId, 
+                c => c.CategoryId, (v, c) => new { Variant = v, Category = c})
                 .OrderByDescending(x => x.Variant.CreateDate)
-                .Take(4)
-                .Select(x => new ProductBoxModel
+                .Take(4).Select(x => new ProductBoxModel
                 {
                     ProductId = x.Variant.ProductId,
                     VariantId = x.Variant.VariantId,
@@ -25,10 +27,11 @@ namespace DotNetShopping.Controllers
                     BrandName = x.Variant.Product.Brand.Name,
                     CategoryName = x.Category.Name,
                     UnitPrice = x.Variant.UnitPrice,
-                    PhotoName = db.ProductImages.Where(i => i.VariantId == x.Variant.VariantId)
+                    PhotoName = db.ProductImages
+                    .Where(i => i.VariantId == x.Variant.VariantId)
                     .OrderBy(i => i.Sequence).FirstOrDefault().FileName
                 })
-            .ToList();
+                .ToList();
             ViewBag.NewProducts = newProducts;
             return View();
         }
