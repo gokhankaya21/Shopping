@@ -11,30 +11,38 @@ namespace DotNetShopping.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: ProductDetail
-        public ActionResult Product(Int64 id,string name)
+        public ActionResult Product(Int64 id, string name)
         {
-            var products = db.Products.Include("Brands")
-                .Join(db.Variants, p => p.ProductId, v => v.ProductId, (p, v) => new { Product = p, Variant = v })
-                .Join(db.Categories, pv => pv.Product.CategoryId, c => c.CategoryId, (pv, c) => new { pv, Category = c })
-                .Where(x => x.pv.Product.Archived == false && x.pv.Variant.Archived == false)
+            var model = db.Variants.Include("Product").Include("Brand")
+                .Where(x => x.Archived == false && x.Product.Archived == false
+                && x.IsVisible == true)
+                .Join(db.Categories, v => v.Product.CategoryId,
+                c => c.CategoryId, (v, c) => new { Variant = v, Category = c })
                 .Select(x => new ProductDetailModel
                 {
-                    ProductId = x.pv.Product.ProductId,
-                    VariantId=x.pv.Variant.VariantId,
-                    ProductName=x.pv.Product.Name,
-                    VariantName=x.pv.Variant.Name,
-                    CategoryId=x.pv.Product.CategoryId,
-                    CategoryName=x.Category.Name,
-                    BrandId=x.pv.Product.BrandId,
-                    BrandName=x.pv.Product.Brand.Name,
-                    Description=x.pv.Product.Description,
-                    IsVisible=x.pv.Product.IsVisible,
-                    OnSale=x.pv.Product.OnSale,
-                    Stock=x.pv.Variant.Stock,
-                    UnitPrice=x.pv.Variant.UnitPrice,
-                    Images=
-                });
-            return View();
+                    ProductId = x.Variant.ProductId,
+                    VariantId = x.Variant.VariantId,
+                    ProductName = x.Variant.Product.Name,
+                    VariantName = x.Variant.Name,
+                    BrandName = x.Variant.Product.Brand.Name,
+                    CategoryName = x.Category.Name,
+                    UnitPrice = x.Variant.UnitPrice,
+                    BrandId = x.Variant.Product.BrandId,
+                    CategoryId = x.Variant.Product.CategoryId,
+                    Description = x.Variant.Product.Description,
+                    OnSale = x.Variant.Product.OnSale,
+                    Stock = x.Variant.Stock,
+                    Unit = x.Variant.Product.Unit,
+                    Images = db.ProductImages
+                    .Where(i => i.VariantId == x.Variant.VariantId)
+                    .OrderBy(i => i.Sequence).ToList()
+                })
+                .FirstOrDefault();
+            if (model == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
         }
     }
 }

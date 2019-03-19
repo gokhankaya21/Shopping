@@ -1,6 +1,9 @@
 ﻿@model DotNetShopping.Models.ProductBoxModel
+@{ 
+    var productName = DotNetShopping.Helpers.StringHelper.ClearFileName(Model.VariantName + " " + Model.ProductName);
+}
 
-<div class="owl-item" style="width: 240px;">
+<div class="owl-item" style="width: 240px;" onclick="window.location.href='p/@(Model.VariantId)/@(productName)'">
     <div class="item">
         <div class="item-area">
             <div class="product-image-area">

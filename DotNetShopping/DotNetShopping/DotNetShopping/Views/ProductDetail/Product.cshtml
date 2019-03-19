@@ -3,6 +3,17 @@
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Product</h2>
-
+<div>
+    <hr />
+</div>
+<div class="row">
+    <div class="container">
+        <div class="col-sm-6">
+            <img src="~/ProductImage/@(Model.Images.FirstOrDefault().FileName)-6.jpg" />
+        </div>
+        <div class="col-sm-6"><div><h1 class="h1">@Model.VariantName - @Model.ProductName</h1></div></div>
+        <div><p>@Model.Description</p></div>
+        <div><p>Availability :@(Model.Stock > 0 ? "In Stock" : "Out of Stock")</p></div>
+        <div><p>$@(Model.UnitPrice)</p></div>
+    </div>
+</div>

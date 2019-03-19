@@ -132,6 +132,6 @@ namespace DotNetShopping.Models
         public string VariantName { get; set; }
         public Decimal UnitPrice { get; set; }
         public Int16 Stock { get; set; }
-        public ProductImage[] Images { get; set; }
+        public IEnumerable<ProductImage> Images { get; set; }
     }
 }
