@@ -182,6 +182,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
@@ -389,6 +390,7 @@
     <Content Include="Views\User\Roles.cshtml" />
     <Content Include="Views\User\CreateRole.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\ProductDetail\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

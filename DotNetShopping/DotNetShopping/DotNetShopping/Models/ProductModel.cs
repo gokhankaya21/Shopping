@@ -114,4 +114,24 @@ namespace DotNetShopping.Models
         public Decimal UnitPrice { get; set; }
         public string PhotoName { get; set; }
     }
+    public class ProductDetailModel
+    {
+        public Int64 ProductId { get; set; }
+        public Int64 VariantId { get; set; }
+        [Display(Name = "Product Name")]
+        public string ProductName { get; set; }
+        public Int16 BrandId { get; set; }
+        public string BrandName { get; set; }
+        public Int16 CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+        public Product.ProductUnit Unit { get; set; }
+        public bool OnSale { get; set; }
+        public bool IsVisible { get; set; }
+        [Display(Name = "Variant Name")]
+        public string VariantName { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public Int16 Stock { get; set; }
+        public ProductImage[] Images { get; set; }
+    }
 }
