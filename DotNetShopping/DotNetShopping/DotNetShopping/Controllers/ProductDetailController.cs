@@ -14,7 +14,7 @@ namespace DotNetShopping.Controllers
         public ActionResult Product(Int64 id, string name)
         {
             var model = db.Variants.Include("Product").Include("Brand")
-                .Where(x => x.Archived == false && x.Product.Archived == false
+                .Where(x => x.VariantId == id && x.Archived == false && x.Product.Archived == false
                 && x.IsVisible == true)
                 .Join(db.Categories, v => v.Product.CategoryId,
                 c => c.CategoryId, (v, c) => new { Variant = v, Category = c })

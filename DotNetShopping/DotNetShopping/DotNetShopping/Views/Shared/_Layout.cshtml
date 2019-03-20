@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/Site/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
+    @RenderSection("head", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -111,5 +112,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @RenderSection("scriptsready", required: false)
+        });
+    </script>
 </body>
 </html>

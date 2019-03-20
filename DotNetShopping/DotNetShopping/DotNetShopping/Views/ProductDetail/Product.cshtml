@@ -7,13 +7,48 @@
     <hr />
 </div>
 <div class="row">
-    <div class="container">
-        <div class="col-sm-6">
-            <img src="~/ProductImage/@(Model.Images.FirstOrDefault().FileName)-6.jpg" />
+    <div class="col-md-6">
+        <div class="slider-for">
+            @foreach (DotNetShopping.Models.ProductImage pi in Model.Images)
+            {
+                <img src="~/ProductImage/@(pi.FileName)-10.jpg" />
+            }
+        </div> 
+        <div class="slider-nav">
+            @foreach (DotNetShopping.Models.ProductImage pi in Model.Images)
+            {
+                <img src="~/ProductImage/@(pi.FileName)-6.jpg" />
+            }
         </div>
-        <div class="col-sm-6"><div><h1 class="h1">@Model.VariantName - @Model.ProductName</h1></div></div>
+    </div>
+    <div class="col-md-6">
+        <div><h1 class="h1">@Model.VariantName - @Model.ProductName</h1></div>
         <div><p>@Model.Description</p></div>
         <div><p>Availability :@(Model.Stock > 0 ? "In Stock" : "Out of Stock")</p></div>
         <div><p>$@(Model.UnitPrice)</p></div>
     </div>
 </div>
+@section head{
+    <link href="~/Content/Site/slick.css" rel="stylesheet" />
+    <link href="~/Content/Site/slick-theme.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/slick.min.js"></script>
+}
+@section scriptsready{
+    $('.slider-for').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    asNavFor: '.slider-for',
+    dots: true,
+    centerMode: true,
+    focusOnSelect: true
+    });
+}
