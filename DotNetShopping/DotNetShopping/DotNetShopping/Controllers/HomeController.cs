@@ -18,7 +18,7 @@ namespace DotNetShopping.Controllers
                 .Join(db.Categories, v => v.Product.CategoryId, 
                 c => c.CategoryId, (v, c) => new { Variant = v, Category = c})
                 .OrderByDescending(x => x.Variant.CreateDate)
-                .Take(4).Select(x => new ProductBoxModel
+                .Take(12).Select(x => new ProductBoxModel
                 {
                     ProductId = x.Variant.ProductId,
                     VariantId = x.Variant.VariantId,
