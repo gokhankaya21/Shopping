@@ -33,6 +33,8 @@ namespace DotNetShopping.Controllers
                     db.Carts.Add(newCart);
                     db.SaveChanges();
                 }
+                var model = GetCart(UserId);
+                return Json(new { Success = true, Cart = model });
             }
             return Json(new { Success = true });
         }
