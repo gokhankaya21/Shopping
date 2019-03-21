@@ -7,13 +7,13 @@ namespace DotNetShopping.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class sequence : IMigrationMetadata
+    public sealed partial class cart : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(sequence));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(cart));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903121301596_sequence"; }
+            get { return "201903211706533_cart"; }
         }
         
         string IMigrationMetadata.Source

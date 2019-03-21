@@ -7,13 +7,13 @@ namespace DotNetShopping.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class userdates : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(userdates));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903151634078_userdates"; }
+            get { return "201903211706196_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

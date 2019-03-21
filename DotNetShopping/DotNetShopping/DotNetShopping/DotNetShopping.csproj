@@ -193,21 +193,18 @@
     </Compile>
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Migrations\201903121300407_InitialExpanse.cs" />
-    <Compile Include="Migrations\201903121300407_InitialExpanse.Designer.cs">
-      <DependentUpon>201903121300407_InitialExpanse.cs</DependentUpon>
+    <Compile Include="Migrations\201903211706196_InitialCreate.cs" />
+    <Compile Include="Migrations\201903211706196_InitialCreate.Designer.cs">
+      <DependentUpon>201903211706196_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903121301596_sequence.cs" />
-    <Compile Include="Migrations\201903121301596_sequence.Designer.cs">
-      <DependentUpon>201903121301596_sequence.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903151634078_userdates.cs" />
-    <Compile Include="Migrations\201903151634078_userdates.Designer.cs">
-      <DependentUpon>201903151634078_userdates.cs</DependentUpon>
+    <Compile Include="Migrations\201903211706533_cart.cs" />
+    <Compile Include="Migrations\201903211706533_cart.Designer.cs">
+      <DependentUpon>201903211706533_cart.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
@@ -425,14 +422,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903121300407_InitialExpanse.resx">
-      <DependentUpon>201903121300407_InitialExpanse.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903211706196_InitialCreate.resx">
+      <DependentUpon>201903211706196_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903121301596_sequence.resx">
-      <DependentUpon>201903121301596_sequence.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903151634078_userdates.resx">
-      <DependentUpon>201903151634078_userdates.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903211706533_cart.resx">
+      <DependentUpon>201903211706533_cart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

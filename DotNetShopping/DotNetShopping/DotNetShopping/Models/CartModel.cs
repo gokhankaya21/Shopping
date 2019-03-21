@@ -17,4 +17,15 @@ namespace DotNetShopping.Models
         public Int64 VariantId { get; set; }
         public int Quantity { get; set; }
     }
+    public class CartListModel
+    {
+        public string UserId { get; set; }
+        public Int64 VariantId { get; set; }
+        public Int64 ProductId { get; set; }
+        public int Quantity { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public Decimal TotalPrice { get; set; }
+        public string VariantName { get; set; }
+        public string ProductName { get; set; }
+    }
 }
