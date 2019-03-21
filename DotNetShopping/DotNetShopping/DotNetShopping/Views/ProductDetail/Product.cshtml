@@ -77,7 +77,7 @@
             }
             $.post('/Api/AddToCart', dataToPost)
                 .done(function (response, status, jqxhr) {
-                    alert(response['Success']);
+                    //alert(response['Success']);
                 })
                 .fail(function (jqxhr, status, error) {
                     alert(response['Error!']);

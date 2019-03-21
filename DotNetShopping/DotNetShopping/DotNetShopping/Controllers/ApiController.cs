@@ -13,7 +13,6 @@ namespace DotNetShopping.Controllers
         [HttpPost]
         public ActionResult AddToCart(Int64 VariantId, int Qty)
         {
-            System.Threading.Thread.Sleep(1000);
             var UserId = User.Identity.GetUserId();
             return Json(new { Success = true });
         }
