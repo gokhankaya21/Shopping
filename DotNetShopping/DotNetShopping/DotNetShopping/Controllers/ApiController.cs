@@ -41,7 +41,8 @@ namespace DotNetShopping.Controllers
         public ActionResult GetShoppingCart()
         {
             var UserId = User.Identity.GetUserId();
-            return Json(new { Success = true });
+            var model = GetCart(UserId);
+            return Json(new { Success = true, Cart = model }, JsonRequestBehavior.AllowGet);
         }
         private IEnumerable<CartListModel> GetCart(string UserId)
         {
