@@ -27,5 +27,6 @@ namespace DotNetShopping.Models
         public Decimal TotalPrice { get; set; }
         public string VariantName { get; set; }
         public string ProductName { get; set; }
+        public string PhotoName { get; set; }
     }
 }

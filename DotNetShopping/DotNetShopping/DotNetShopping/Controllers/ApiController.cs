@@ -59,7 +59,9 @@ namespace DotNetShopping.Controllers
                     VariantName = x.cv.Variant.Name,
                     ProductName = x.cv.Variant.Product.Name,
                     UnitPrice = x.cv.Variant.UnitPrice,
-                    TotalPrice = x.cv.Variant.UnitPrice * x.cv.Cart.Quantity
+                    TotalPrice = x.cv.Variant.UnitPrice * x.cv.Cart.Quantity,
+                    PhotoName = db.ProductImages.Where(pi => pi.VariantId == x.cv.Variant.VariantId)
+                    .OrderBy(pi => pi.Sequence).FirstOrDefault().FileName
                 }).ToList();
             return model;
         }

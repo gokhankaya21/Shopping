@@ -48,7 +48,7 @@
                                             <span class="cartQty" id="cartQty">0</span>
                                             <div class="cartText">Items</div>
                                             <div class="cartArea"></div>
-                                            <div class="cartContent"></div>
+                                            <div class="cartContent" id="cartContent"></div>
                                         </div>
                                     </li>
                                 </ul>
@@ -143,9 +143,11 @@
 
             $('.cart').mouseover(function (e) {
                 $(this).children('.cartContent').fadeIn(200);
+                $(this).children('.cartArea').fadeIn(200);
                 return false;
             }).mouseleave(function (e) {
                 $(this).children('.cartContent').fadeOut(200);
+                $(this).children('.cartArea').fadeOut(200);
                 return false;
             });
         });

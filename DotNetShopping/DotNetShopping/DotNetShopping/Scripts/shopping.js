@@ -11,13 +11,26 @@
 
 function displayShoppingCart(cart) {
     var qty = 0;
-    for (var i = 0; i < cart.length; i++)
-    {
+    var cartContent = "";
+    for (var i = 0; i < cart.length; i++) {
         qty += parseInt(cart[i]['Quantity']);
+        cartContent += getCartContent(cart[i]);
     }
     $('#cartQty').html(qty);
+    $('#cartContent').html(cartContent);
 }
-
+function getCartContent(item) {
+    var content = '<div class=\'cartItem\'>' +
+        '<img src=\'../../ProductImage/' + item['PhotoName'] + '-1.jpg\'>' +
+        '<div class=\'cartItemName\'>' + item['VariantName'] + ' ' + item['ProductName'] + '</div>' +
+        '<div class=\'cartQuantity\'>' + item['Quantity'] + ' ' + 'x' + ' ' + '$' + item['UnitPrice'] + '</div>' +
+        '<i class=\'cartRemove glyphicon glyphicon-remove-circle\' onclick=\'removeCart(' + item['VariantId'] + ');\'></i>'
+        + '</div>';
+    return content;
+}
+function removeCart(variantId) {
+    alert(variantId + ' removed');
+}
 function addToCart(variantId, qty) {
     var dataToPost = {
         VariantId: variantId,
