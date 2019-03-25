@@ -38,6 +38,23 @@ namespace DotNetShopping.Controllers
             }
             return Json(new { Success = true });
         }
+        [HttpPost]
+        public ActionResult RemoveCart(Int64 VariantId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var UserId = User.Identity.GetUserId();
+                var cart = db.Carts.Where(x => x.UserId == UserId && x.VariantId == VariantId).FirstOrDefault();
+                if (cart != null)
+                {
+                    db.Carts.Remove(cart);
+                    db.SaveChanges();
+                }
+                var model = GetCart(UserId);
+                return Json(new { Success = true, Cart = model });
+            }
+            return Json(new { Success = true });
+        }
         public ActionResult GetShoppingCart()
         {
             var UserId = User.Identity.GetUserId();

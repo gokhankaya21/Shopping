@@ -24,13 +24,25 @@ function getCartContent(item) {
         '<img src=\'../../ProductImage/' + item['PhotoName'] + '-1.jpg\'>' +
         '<div class=\'cartItemName\'>' + item['VariantName'] + ' ' + item['ProductName'] + '</div>' +
         '<div class=\'cartQuantity\'>' + item['Quantity'] + ' ' + 'x' + ' ' + '$' + item['UnitPrice'] + '</div>' +
-        '<i class=\'cartRemove glyphicon glyphicon-remove-circle\' onclick=\'removeCart(' + item['VariantId'] + ');\'></i>'
+        '<i class=\'cartRemove glyphicon glyphicon-remove-circle\' onclick=\'removeCart(' + item['VariantId'] + ');\' title=\'Delete\'></i>'
         + '</div>';
     return content;
 }
 function removeCart(variantId) {
-    alert(variantId + ' removed');
+    //alert(variantId + ' removed');
+    var dataToPost = {
+        VariantId: variantId
+    };
+    $.post('/Api/RemoveCart', dataToPost)
+        .done(function (response, status, jqxhr) {
+            //alert(response['Success']);
+            displayShoppingCart(response['Cart']);
+        })
+        .fail(function (jqxhr, status, error) {
+            //alert(response['Error!']);
+        });
 }
+
 function addToCart(variantId, qty) {
     var dataToPost = {
         VariantId: variantId,

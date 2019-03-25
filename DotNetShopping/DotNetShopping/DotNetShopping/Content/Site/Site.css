@@ -717,6 +717,7 @@ button.button {
     box-shadow: 0 1px 2px rgba(0,0,0,2);
     border-color: #21293c !important;
     font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
+    padding-top:10px;
 }
 
 .cartArea:before {
@@ -732,9 +733,10 @@ button.button {
 
 .cartItem {
     display: inline-block;
-    padding: 10px 10px 20px 10px;
+    padding: 10px 10px 20px 0px;
+    margin-left:20px;
     border-bottom: 1px solid #808080;
-    width:280px;
+    width:260px;
 }
 
     .cartItem img {
