@@ -7,7 +7,8 @@
 
 h1, h2, h3 {
     color: #21293c;
-    font-size: 15pt;
+    font-size: 20pt;
+    letter-spacing: 2px;
 }
 
 a {
@@ -506,8 +507,14 @@ button.button {
     float: left;
 }
 
-    button.button:hover > span, button.button span {
+    button.button:hover > span {
         background-color: #e1ddc3;
+        color: #61605a;
+        float: left;
+        padding: 7px 10px;
+    }
+
+    button.button > span {
         color: #61605a;
         float: left;
         padding: 7px 10px;
@@ -664,10 +671,10 @@ button.button {
 }
 
 .cart {
-    padding:15px 15px;
+    padding: 15px 15px;
     position: relative;
     cursor: pointer;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 .cartArea {
@@ -715,10 +722,10 @@ button.button {
     max-height: 600px;
     overflow: auto;
     display: none;
-    box-shadow: 0 1px 2px rgba(0,0,0,2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     border-color: #21293c !important;
     font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
 .cartArea:before {
@@ -729,15 +736,14 @@ button.button {
     display: block;
     right: 65px;
     top: 30px;
-    z-index:1001;
 }
 
 .cartItem {
     display: inline-block;
-    padding: 10px 10px 20px 0px;
-    margin-left:20px;
-    border-bottom: 1px solid #808080;
-    width:260px;
+    padding: 10px 10px 10px 0px;
+    margin-left: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    width: 260px;
 }
 
     .cartItem img {
@@ -750,15 +756,17 @@ button.button {
     padding: 5px 5px 5px 5px;
     width: 200px;
 }
-.cartQuantity{
-    float:left;
-    color:#e1ddc3;
-    display:inline-block;
-    padding:5px 5px 5px 5px;
+
+.cartQuantity {
+    display: inline-block;
+    padding: 5px 5px 5px 5px;
+    color: #8f8f8f;
 }
-.cartRemove{
-    float:right;
+
+.cartRemove {
+    float: right;
 }
+
 .cartTotal {
     display: inline-block;
     padding: 10px 10px 10px 0px;
@@ -772,8 +780,8 @@ button.button {
 .cartButtons {
     padding: 10px 10px 40px 0px;
     margin-left: 20px;
-    margin-bottom:10px;
     width: 260px;
+    margin-bottom: 20px;
 }
 
     .cartButtons .btn-default {
@@ -794,13 +802,113 @@ button.button {
             float: right;
             background-color: #fff;
         }
+
+.cartBox {
+    border: 1px solid #ececec;
+    min-height: 100px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.08);
+}
+
+.cartTable {
+    width: 100%;
+    font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
+    margin: 10px;
+}
+
+    .cartTable th {
+        font-weight: 600;
+        color: #777;
+        font-size: 14px;
+        padding: 20px 5px 20px 5px;
+    }
+
+    .cartTable td {
+        padding: 20px 5px 20px 5px;
+    }
+
+    .cartTable .table_qty_dec {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+        color: #777;
+        line-height: 30px;
+        border-radius: 0;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        vertical-align: top;
+    }
+
+    .cartTable .table_qty_inc {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+        color: #777;
+        line-height: 30px;
+        border-radius: 0;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        vertical-align: top;
+    }
+
+    .cartTable .qty {
+        width: 40px;
+        margin: 0 -5px;
+        height: 30px;
+        border-color: #ccc;
+        color: #777;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .cartTable .qty-holder {
+        width: 120px;
+    }
+
+    .cartTable button {
+        overflow: visible;
+        width: auto;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        background-image: initial;
+        background-position-x: initial;
+        background-position-y: initial;
+        background-size: initial;
+        background-attachment: initial;
+        background-origin: initial;
+        background-clip: initial;
+        background-color: transparent;
+        cursor: pointer;
+        float: right;
+        margin-right: 20px;
+    }
+
+        .cartTable button > span {
+            background: #fff;
+            border: 1px solid #ccc;
+            color: #777;
+            line-height: 32px;
+        }
+
+
 #loading {
     position: fixed;
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 0.7;
     z-index: 999;
+    opacity: 0.7;
     display: none;
 }
 
@@ -809,15 +917,13 @@ button.button {
     left: 50%;
     top: 50%;
     z-index: 1000;
-    width: 50px;
-    height: 50px;
-    margin: -75px 0 0 -75px;
     border: 6px solid #ffffff;
     border-radius: 50%;
     border-top: 6px solid #000000;
-    -webkit-animation: spin 2s linear infinite;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
-    opacity: 1;
     display: none;
 }
 
