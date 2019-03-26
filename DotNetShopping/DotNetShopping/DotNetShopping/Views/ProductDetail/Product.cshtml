@@ -37,7 +37,19 @@
                             <a href="javascript:minusClick();" class="qty_dec"><i class="glyphicon glyphicon-minus"></i></a>
                         </div>
                     </div>
-                    <button type="button" title="Add to Cart" class="button btn-cart" onclick="addToCart(@Model.VariantId,parseInt($('#qty').val()));"><span><span>Add to Cart</span></span></button>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <button type="button" title="Add to Cart" class="button btn-cart" onclick="addToCart(@Model.VariantId, parseInt($('#qty').val()));">
+                            <i class="glyphicon glyphicon-shopping-cart"></i><span><span>Add to Cart</span></span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" title="Add to Cart" class="button btn-cart" onclick="window.location='@Url.Action("Login","Account",new { returnUrl = Url.Action("Product", "ProductDetail", new { id = Model.VariantId, name = DotNetShopping.Helpers.StringHelper.ClearFileName(Model.VariantName + " " + Model.ProductName) }) })';">
+                            <span><span>Add to Cart</span></span>
+                        </button>
+                    }
+
                     <span id="ajax_loader" style="display:none"><i class="ajax-loader small animate-spin"></i></span>
                 </div>
                 <ul class="add-to-links">

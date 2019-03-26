@@ -11,13 +11,22 @@
 
 function displayShoppingCart(cart) {
     var qty = 0;
-    var cartContent = "";
+    var totalPrice = 0;
+    var cartContent = '';
+    var cartTotalContent = '';
     for (var i = 0; i < cart.length; i++) {
         qty += parseInt(cart[i]['Quantity']);
+        totalPrice += parseInt(cart[i]['Quantity']) * parseFloat(cart[i]['UnitPrice']);
         cartContent += getCartContent(cart[i]);
     }
     $('#cartQty').html(qty);
-    $('#cartContent').html(cartContent);
+    if (qty > 0) {
+        cartTotalContent = getCartTotalContent(totalPrice);
+    }
+    else {
+        cartContent = '<div class=\'cartItem\' style=\'text-align:center;\'>Your cart is empty.</div>'
+    }
+    $('#cartContent').html(cartContent + cartTotalContent);
 }
 function getCartContent(item) {
     var content = '<div class=\'cartItem\'>' +
@@ -28,6 +37,17 @@ function getCartContent(item) {
         + '</div>';
     return content;
 }
+
+function getCartTotalContent(totalPrice) {
+    var content = '<div class=\'cartTotal\'>Total: $' + totalPrice.toFixed(2) + '</div>' +
+        '<div class=\'cartButtons\'>' +
+        '<a class=\'btn btn-default\' href=\'../../Checkout/Cart\'><i class="icon-basket"></i>View Cart</a>' +
+        '<a class=\'btn btn-default\' href=\'../../Checkout/Checkout\'><i class="icon-right-thin"></i>Checkout</a>' +
+        '<div class=\'clearer\'></div>' +
+        '</div >';
+    return content;
+}
+
 function removeCart(variantId) {
     //alert(variantId + ' removed');
     var dataToPost = {
