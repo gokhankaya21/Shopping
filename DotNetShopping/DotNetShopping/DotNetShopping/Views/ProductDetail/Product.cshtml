@@ -40,7 +40,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <button type="button" title="Add to Cart" class="button btn-cart" onclick="addToCart(@Model.VariantId, parseInt($('#qty').val()));">
-                            <i class="glyphicon glyphicon-shopping-cart"></i><span><span>Add to Cart</span></span>
+                            <span class="button_border"><span>Add to Cart</span></span>
                         </button>
                     }
                     else

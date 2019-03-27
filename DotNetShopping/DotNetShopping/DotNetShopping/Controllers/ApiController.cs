@@ -33,7 +33,8 @@ namespace DotNetShopping.Controllers
                     db.Carts.Add(newCart);
                     db.SaveChanges();
                 }
-                var model = GetCart(UserId);
+                CartListModel co = new CartListModel();
+                var model = co.GetCart(UserId);
                 return Json(new { Success = true, Cart = model });
             }
             return Json(new { Success = true });
@@ -50,37 +51,19 @@ namespace DotNetShopping.Controllers
                     db.Carts.Remove(cart);
                     db.SaveChanges();
                 }
-                var model = GetCart(UserId);
+                CartListModel co = new CartListModel();
+                var model = co.GetCart(UserId);
                 return Json(new { Success = true, Cart = model });
             }
             return Json(new { Success = true });
         }
         public ActionResult GetShoppingCart()
         {
+            CartListModel co = new CartListModel();
             var UserId = User.Identity.GetUserId();
-            var model = GetCart(UserId);
+            var model = co.GetCart(UserId);
             return Json(new { Success = true, Cart = model }, JsonRequestBehavior.AllowGet);
         }
-        private IEnumerable<CartListModel> GetCart(string UserId)
-        {
-            var model = db.Carts
-                .Join(db.Variants, c => c.VariantId, v => v.VariantId, (c, v) => new { Cart = c, Variant = v })
-                .Join(db.Products, cv => cv.Variant.ProductId, p => p.ProductId, (cv, p) => new { cv, Product = p })
-                .Where(x => x.cv.Cart.UserId == UserId)
-                .Select(x => new CartListModel
-                {
-                    UserId = x.cv.Cart.UserId,
-                    VariantId = x.cv.Cart.VariantId,
-                    ProductId = x.cv.Variant.ProductId,
-                    Quantity = x.cv.Cart.Quantity,
-                    VariantName = x.cv.Variant.Name,
-                    ProductName = x.cv.Variant.Product.Name,
-                    UnitPrice = x.cv.Variant.UnitPrice,
-                    TotalPrice = x.cv.Variant.UnitPrice * x.cv.Cart.Quantity,
-                    PhotoName = db.ProductImages.Where(pi => pi.VariantId == x.cv.Variant.VariantId)
-                    .OrderBy(pi => pi.Sequence).FirstOrDefault().FileName
-                }).ToList();
-            return model;
-        }
+        
     }
 }
