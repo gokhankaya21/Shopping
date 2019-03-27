@@ -18,12 +18,24 @@ namespace DotNetShopping.Controllers
             var cart = co.GetCart(User.Identity.GetUserId());
             return View(cart);
         }
-
-        public ActionResult Checkout()
+        [HttpPost]
+        public ActionResult Cart(List<CartListModel> cartForm)
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var carts = db.Carts.Where(x => x.UserId == userId).ToList();
+            foreach (Cart cart in carts)
+            {
+                int formValue = cartForm.Where(x => x.VariantId == cart.VariantId).FirstOrDefault().Quantity;
+                if(cart.Quantity!=formValue)
+                {
+                    cart.Quantity = formValue;
+                }
+            }
+            db.SaveChanges();
+            CartListModel co = new CartListModel();
+            var model = co.GetCart(User.Identity.GetUserId());
+            return View(model);
         }
-
 
         public ActionResult DeleteCart(Int64 VariantId)
         {
@@ -38,6 +50,26 @@ namespace DotNetShopping.Controllers
                 }
             }
             return RedirectToAction("Cart");
+        }
+
+        public ActionResult DeleteAllCart()
+        {
+           if (User.Identity.IsAuthenticated)
+           {
+               var UserId = User.Identity.GetUserId();
+               var carts = db.Carts.Where(x => x.UserId == UserId).ToList();
+               if (carts != null)
+               {
+                   db.Carts.RemoveRange(carts);
+                   db.SaveChanges();
+               }
+           }
+           return RedirectToAction("Cart");
+        }
+
+        public ActionResult Checkout()
+        {
+            return View();
         }
     }
 }
