@@ -488,6 +488,9 @@ footer .account-info a {
 }
 
 button.button {
+    font-family: "Oswald";
+    letter-spacing: 1px;
+    text-transform: uppercase;
     -webkit-border-fit: lines;
     overflow: visible;
     width: auto;
@@ -606,9 +609,7 @@ button.button {
 .qty_dec {
     left: 1px;
 }
-.button_border{
-    border:1px solid #ccc;
-}
+
 .add-to-cart button.button {
     height: 43px;
     width: 135px;
@@ -902,6 +903,77 @@ button.button {
             color: #777;
             line-height: 32px;
         }
+
+.sidebarBox {
+    font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.20);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebarBoxHeader {
+    font-weight: 700;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+    .sidebarBoxHeader i {
+        float: right;
+        cursor: pointer;
+    }
+
+.sidebarBoxContent {
+    padding: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.20);
+    background-color: #fbfbfb;
+}
+
+    .sidebarBoxContent div {
+        height: 30px;
+    }
+
+    .sidebarBoxContent .title {
+        color: #777;
+        font-size: 12pt;
+    }
+
+    .sidebarBoxContent .amount {
+        font-size: 14pt;
+        font-weight: bold;
+        float: right;
+    }
+
+    .sidebarBoxContent button.button {
+        width: 100%;
+    }
+
+        .sidebarBoxContent button.button > span {
+            width: 100%;
+            background-color: #e1ddc3;
+            color: black;
+            display: block;
+            border: 0;
+            padding: 0 15px;
+            font-weight: 400;
+            font-size: 14px;
+            text-align: center;
+            white-space: nowrap;
+            line-height: 38px;
+        }
+
+button.button:hover span {
+    background-color: #e1ddc3;
+    color: #61605a;
+}
+.sidebarBoxContent input{
+    height:38px;
+    border:1px solid #ccc;
+    width:100%;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+
 
 
 #loading {

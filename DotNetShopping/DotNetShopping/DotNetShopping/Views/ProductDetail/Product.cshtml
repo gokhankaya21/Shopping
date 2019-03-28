@@ -46,7 +46,7 @@
                     else
                     {
                         <button type="button" title="Add to Cart" class="button btn-cart" onclick="window.location='@Url.Action("Login","Account",new { returnUrl = Url.Action("Product", "ProductDetail", new { id = Model.VariantId, name = DotNetShopping.Helpers.StringHelper.ClearFileName(Model.VariantName + " " + Model.ProductName) }) })';">
-                            <span><span>Add to Cart</span></span>
+                            <span class="button_border"><span>Add to Cart</span></span>
                         </button>
                     }
 
