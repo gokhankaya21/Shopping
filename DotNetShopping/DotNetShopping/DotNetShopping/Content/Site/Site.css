@@ -972,10 +972,49 @@ button.button:hover span {
     margin-top:5px;
     margin-bottom:10px;
 }
+.opc {
+    list-style: none;
+    font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
+}
+    .opc li.section{
+        margin-bottom:5px;
+        box-shadow:0 2px 3px rgba(0,0,0,0.20);
+        border-radius:0;
+    }
+    .opc .step-title{
+        cursor:default;
+        border-bottom-width:0;
+        border-radius:0;
+        background:#f6f6f6;
+        color:black;
+        height:45px;
+        padding:10px;
+    }
+        .opc .active .step-title .title{
+            float:left;
+            line-height:1;
+            font-size:16px;
+        }
+        .opc .step-title .number {
+            float: left;
+            padding-right:10px;
+            line-height: 1;
+            font-size: 16px;
+        }
 
 
 
 
+
+
+
+
+
+
+
+.button_border {
+            border: 1px solid #ccc;
+        }
 #loading {
     position: fixed;
     width: 100%;
