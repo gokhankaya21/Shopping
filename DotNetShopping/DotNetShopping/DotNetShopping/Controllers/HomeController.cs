@@ -12,11 +12,13 @@ namespace DotNetShopping.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var newProducts = db.Variants.Include("Product").Include("Brand")
-                .Where(x => x.Archived == false && x.Product.Archived == false 
+            try
+            {
+                var newProducts = db.Variants.Include("Product").Include("Brand")
+                .Where(x => x.Archived == false && x.Product.Archived == false
                 && x.IsVisible == true && x.Stock > 0 && x.Product.OnSale == true)
-                .Join(db.Categories, v => v.Product.CategoryId, 
-                c => c.CategoryId, (v, c) => new { Variant = v, Category = c})
+                .Join(db.Categories, v => v.Product.CategoryId,
+                c => c.CategoryId, (v, c) => new { Variant = v, Category = c })
                 .OrderByDescending(x => x.Variant.CreateDate)
                 .Take(12).Select(x => new ProductBoxModel
                 {
@@ -32,7 +34,14 @@ namespace DotNetShopping.Controllers
                     .OrderBy(i => i.Sequence).FirstOrDefault().FileName
                 })
                 .ToList();
-            ViewBag.NewProducts = newProducts;
+                ViewBag.NewProducts = newProducts;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.NewProducts = new List<ProductBoxModel>();
+                ViewBag.Error = ex.Message;
+            }
+            
             return View();
         }
 

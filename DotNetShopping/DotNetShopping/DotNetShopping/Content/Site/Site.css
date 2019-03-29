@@ -477,7 +477,6 @@ footer .account-info a {
 }
 
 .input-box input {
-    background-color: #33332f;
     color: #686865;
     height: 48px;
     border: none;
@@ -965,43 +964,79 @@ button.button:hover span {
     background-color: #e1ddc3;
     color: #61605a;
 }
-.sidebarBoxContent input{
-    height:38px;
-    border:1px solid #ccc;
-    width:100%;
-    margin-top:5px;
-    margin-bottom:10px;
+
+.sidebarBoxContent input {
+    height: 38px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
+
 .opc {
     list-style: none;
     font: 13px/1 'Open Sans',Arial,Helvetica,sans-serif;
+    padding: 0px;
 }
-    .opc li.section{
-        margin-bottom:5px;
-        box-shadow:0 2px 3px rgba(0,0,0,0.20);
-        border-radius:0;
+
+    .opc li.section {
+        margin-bottom: 5px;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.20);
+        border-radius: 0;
     }
-    .opc .step-title{
-        cursor:default;
-        border-bottom-width:0;
-        border-radius:0;
-        background:#f6f6f6;
-        color:black;
-        height:45px;
-        padding:10px;
+
+    .opc .step-title {
+        cursor: default;
+        border-bottom-width: 0;
+        border-radius: 0;
+        background: #f6f6f6;
+        color: black;
+        height: 45px;
+        padding: 10px;
     }
-        .opc .active .step-title .title{
-            float:left;
-            line-height:1;
-            font-size:16px;
-        }
-        .opc .step-title .number {
-            float: left;
-            padding-right:10px;
-            line-height: 1;
-            font-size: 16px;
+
+    .opc .active .step-title .title {
+        float: left;
+        line-height: 1;
+        font-size: 16px;
+    }
+
+    .opc .step-title .number {
+        float: left;
+        padding-right: 10px;
+        line-height: 1;
+        font-size: 16px;
+    }
+
+.checkoutContent {
+    display: block;
+    padding: 10px;
+    font-size: 14px;
+}
+
+    .checkoutContent input, select {
+        max-width: unset;
+        border-radius: 0;
+        margin-bottom: 5px;
+    }
+
+    .checkoutContent .input-label {
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+        .checkoutContent .input-label label {
+            font-weight: 400;
         }
 
+    .checkoutContent .input-editor {
+        display: block;
+    }
+
+        .checkoutContent .input-editor .form-control {
+            border-radius: 0;
+        }
 
 
 
@@ -1013,8 +1048,9 @@ button.button:hover span {
 
 
 .button_border {
-            border: 1px solid #ccc;
-        }
+    border: 1px solid #ccc;
+}
+
 #loading {
     position: fixed;
     width: 100%;

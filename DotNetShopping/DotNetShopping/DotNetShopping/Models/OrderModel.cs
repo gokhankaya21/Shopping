@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -21,7 +22,11 @@ namespace DotNetShopping.Models
         public Int64 OrderId { get; set; }
         public string UserId { get; set; }
         public string BillingEmail { get; set; }
+        [Required]
+        [Display(Name ="First Name")]
         public string BillingFirstName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
         public string BillingLastName { get; set; }
         public string BillingCompany { get; set; }
         public string BillingStreet1 { get; set; }
