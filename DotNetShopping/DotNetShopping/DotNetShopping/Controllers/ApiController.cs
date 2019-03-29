@@ -65,5 +65,17 @@ namespace DotNetShopping.Controllers
             return Json(new { Success = true, Cart = model }, JsonRequestBehavior.AllowGet);
         }
         
+        public ActionResult GetStatesFor(Int16 CountryId)
+        {
+            var states = db.States.Where(x => x.CountryId == CountryId)
+                .OrderBy(x => x.Name).ToList();
+            return Json(new { Success = true, States = states }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetCitiesFor(Int16 CountryId,Int16 StateId)
+        {
+            var cities = db.Cities.Where(x => x.CountryId == CountryId && x.StateId == StateId)
+                .OrderBy(x => x.Name).ToList();
+            return Json(new { Success = true, Cities = cities }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

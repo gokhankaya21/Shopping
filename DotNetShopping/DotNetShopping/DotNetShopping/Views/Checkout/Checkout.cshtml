@@ -96,6 +96,26 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.BillingCityId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.DropDownList("BillingCityId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BillingCityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.BillingZip, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.BillingZip, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.BillingZip, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </li>
                 <li id="opc-shipping" class="section">
@@ -142,6 +162,81 @@
     <div class="col-sm-3">
     </div>
 </div>
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+@section scriptsready{
+    $("#BillingCountryId").change(function () {
+        var countryId = this.value;
+        //alert('countryId:' + countryId);
+        $('#BillingStateId').empty();
+        if (countryId > 0) {
+            var dataToPost = {
+                CountryId: countryId
+            };
+            $.post('/Api/GetStatesFor', dataToPost)
+                .done(function (response, status, jqxhr) {
+                    // this is the "success" callback
+                    if (response['States'].length > 0) {
+                        $('#BillingStateId').prop("disabled", false);
+                        $.each(response['States'], function () {
+                            $('#BillingStateId').append($("<option />").val(this.StateId).text(this.Name));
+                        });
+                    }
+                    else {
+                        $('#BillingStateId').append($("<option />").val(0).text('No State'));
+                        $('#BillingStateId').prop("disabled", true);
+                    }
+                })
+                .fail(function (jqxhr, status, error) {
+                    // this is the ""error"" callback
+                    alert('Error!');
+                });
+        }
+        else {
+            $('#BillingStateId').append($("<option />").val(0).text('Select Country'));
+        }
+    });
+
+
+    @*$("#BillingCountryId").change(function () {
+        var countryId = this.value;
+        //alert('countryId:' + countryId);
+        $('#BillingCityId').empty();
+        if (countryId > 0) {
+            var dataToPost = {
+                CountryId: countryId
+            };
+            $.post('/Api/GetCitiesFor', dataToPost)
+                .done(function (response, status, jqxhr) {
+                    // this is the "success" callback
+                    if (response['Cities'].length > 0) {
+                        $('#BillingCityId').prop("disabled", false);
+                        $.each(response['Cities'], function () {
+                            $('#BillingCityId').append($("<option />").val(this.CityId).text(this.Name));
+                        });
+                    }
+                    else {
+                        $('#BillingCityId').append($("<option />").val(0).text('No State'));
+                        $('#BillingCityId').prop("disabled", true);
+                    }
+                })
+                .fail(function (jqxhr, status, error) {
+                    // this is the ""error"" callback
+                    alert('Error!');
+                });
+        }
+        else {
+            $('#BillingCityId').append($("<option />").val(0).text('Select Country'));
+        }
+    });*@
+
+
+
+
+
+
+
+
+
 }

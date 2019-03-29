@@ -79,6 +79,11 @@ namespace DotNetShopping.Controllers
             var selectState = new List<string>();
             selectState.Add("Select Country");
             ViewBag.BillingStateId = new SelectList(selectState);
+
+            var selectCity = new List<string>();
+            selectCity.Add("Select Country/State");
+            ViewBag.BillingCityId = new SelectList(selectCity);
+
             return View();
         }
     }
