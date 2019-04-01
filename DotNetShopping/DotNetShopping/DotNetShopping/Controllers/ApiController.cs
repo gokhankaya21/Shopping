@@ -75,7 +75,7 @@ namespace DotNetShopping.Controllers
         {
             var cities = db.Cities.Where(x => x.CountryId == CountryId && x.StateId == StateId)
                 .OrderBy(x => x.Name).ToList();
-            return Json(new { Success = true, Cities = cities }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, Cities = cities });
         }
     }
 }
