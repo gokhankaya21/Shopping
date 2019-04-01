@@ -86,6 +86,7 @@ namespace DotNetShopping.Controllers
             ViewBag.BillingCityId = new SelectList(selectCity);
             ViewBag.ShippingCityId = new SelectList(selectCity);
 
+            
             return View();
         }
     }

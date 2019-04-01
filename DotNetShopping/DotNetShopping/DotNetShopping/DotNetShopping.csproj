@@ -183,9 +183,12 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentMethodsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\ProductImageController.cs" />
+    <Compile Include="Controllers\ShippingCostsController.cs" />
+    <Compile Include="Controllers\ShippingMethodsController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -422,6 +425,21 @@
     <Content Include="Views\ProductDetail\Product.cshtml" />
     <Content Include="Views\Checkout\Cart.cshtml" />
     <Content Include="Views\Checkout\Checkout.cshtml" />
+    <Content Include="Views\ShippingMethods\Create.cshtml" />
+    <Content Include="Views\ShippingMethods\Delete.cshtml" />
+    <Content Include="Views\ShippingMethods\Details.cshtml" />
+    <Content Include="Views\ShippingMethods\Edit.cshtml" />
+    <Content Include="Views\ShippingMethods\Index.cshtml" />
+    <Content Include="Views\ShippingCosts\Create.cshtml" />
+    <Content Include="Views\ShippingCosts\Delete.cshtml" />
+    <Content Include="Views\ShippingCosts\Details.cshtml" />
+    <Content Include="Views\ShippingCosts\Edit.cshtml" />
+    <Content Include="Views\ShippingCosts\Index.cshtml" />
+    <Content Include="Views\PaymentMethods\Create.cshtml" />
+    <Content Include="Views\PaymentMethods\Delete.cshtml" />
+    <Content Include="Views\PaymentMethods\Details.cshtml" />
+    <Content Include="Views\PaymentMethods\Edit.cshtml" />
+    <Content Include="Views\PaymentMethods\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

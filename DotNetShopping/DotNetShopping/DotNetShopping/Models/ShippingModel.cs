@@ -31,4 +31,17 @@ namespace DotNetShopping.Models
         public Decimal CostTwo { get; set; }
         public Decimal CostTwoHalf { get; set; }
     }
+    public class ShippingListModel
+    {
+        public Int16 ShippingMethodId { get; set; }
+        public string Name { get; set; }
+        public bool Domestic { get; set; }
+        public bool International { get; set; }
+        public Int16 CountryId { get; set; }
+        public Decimal CostHalf { get; set; }
+        public Decimal CostOne { get; set; }
+        public Decimal CostOneHalf { get; set; }
+        public Decimal CostTwo { get; set; }
+        public Decimal CostTwoHalf { get; set; }
+    }
 }

@@ -77,5 +77,26 @@ namespace DotNetShopping.Controllers
                 .OrderBy(x => x.Name).ToList();
             return Json(new { Success = true, Cities = cities });
         }
+
+        public ActionResult GetShippingMethods(Int16 CountryId)
+        {
+            var model = db.ShippingMethods
+                .Join(db.ShippingCosts,sm=>sm.ShippingMethodId,sc=>sc.ShippingMethodId,(sm,sc)=>new { ShippingMethod = sm, ShippingCost = sc }).Where(x=>x.ShippingCost.CountryId==CountryId)
+                .Select(x => new ShippingListModel{
+                    ShippingMethodId=x.ShippingMethod.ShippingMethodId,
+                    Name=x.ShippingMethod.Name,
+                    Domestic=x.ShippingMethod.Domestic,
+                    International=x.ShippingMethod.International,
+                    CostHalf=x.ShippingCost.CostHalf,
+                    CostOne=x.ShippingCost.CostOne,
+                    CostOneHalf=x.ShippingCost.CostOneHalf,
+                    CostTwo=x.ShippingCost.CostTwo,
+                    CostTwoHalf=x.ShippingCost.CostTwoHalf,
+                    CountryId=x.ShippingCost.CountryId
+                })
+                .OrderBy(x => x.Name).ToList();
+
+            return Json(new { Success = true, ShippingMethods = model }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

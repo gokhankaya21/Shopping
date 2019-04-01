@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                
+
                             </div>
                         </div>
                         <div class="row">
@@ -254,7 +254,20 @@
                         <span class="title">Shipping Method</span>
                     </div>
                     <div id="checkout-step-shipping_method" class="checkoutContent">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingMethodId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    <select id="ShippingMethod"></select>
+                                    @Html.ValidationMessageFor(model => model.ShippingMethodId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
 
+                            </div>
+                        </div>
                     </div>
                 </li>
                 <li id="opc-payment" class="section">
@@ -262,7 +275,7 @@
                         <span class="number">5</span>
                         <span class="title">Payment Information</span>
                     </div>
-                    <div id="checkout-step-payment" class="checkoutContent" >
+                    <div id="checkout-step-payment" class="checkoutContent">
 
                     </div>
                 </li>
@@ -286,71 +299,90 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 @section scriptsready{
-    $("#BillingCountryId").change(function () {
-    var countryId = this.value;
-    //alert('countryId:' + countryId);
-    $('#BillingStateId').empty();
-    $('#BillingCityId').empty();
+    @*<script>*@
+        $("#BillingCountryId").change(function () {
+            var countryId = this.value;
+            //alert('countryId:' + countryId);
+            $('#BillingStateId').empty();
+            $('#BillingCityId').empty();
 
-    if (countryId > 0) {
-    var dataToPost = {
-    CountryId: countryId
-    };
-    $.post('/Api/GetStatesFor', dataToPost)
-    .done(function (response, status, jqxhr) {
-    // this is the "success" callback
-    if (response['States'].length > 0) {
-    $('#BillingCityId').append($("<option />").val(0).text('Select Country/State'));
-    $('#BillingStateId').prop("disabled", false);
-    $('#BillingStateId').append($("<option />").val(0).text('Select State'));
-    $.each(response['States'], function () {
-    $('#BillingStateId').append($("<option />").val(this.StateId).text(this.Name));
-    });
-    }
-    else {
-    $('#BillingStateId').append($("<option />").val(0).text('No State'));
-    $('#BillingStateId').prop("disabled", true);
-    fillCities(countryId, 0);
-    }
-    })
-    .fail(function (jqxhr, status, error) {
-    // this is the ""error"" callback
-    alert('Error!');
-    });
-    }
-    else {
-    $('#BillingStateId').append($("<option />").val(0).text('Select Country'));
-    $('#BillingStateId').prop("disabled", false);
-    }
-    });
-    $("#BillingStateId").change(function () {
-    var countryId = $('#BillingCountryId').val();
-    var stateId = this.value;
-    if (stateId > 0 && countryId > 0) {
-    fillCities(countryId, stateId);
-    }
-    else {
-    $('#BillingCityId').append($("<option />").val(0).text('Select Country/State'));
-    }
-    });
-    function fillCities(countryId, stateId) {
-    var dataToPost = {
-    CountryId: countryId,
-    StateId: stateId
-    };
-    $.post('/Api/GetCitiesFor', dataToPost)
-    .done(function (response, status, jqxhr) {
-    if (response['Cities'].length > 0) {
-    $('#BillingCityId').empty();
-    $('#BillingCityId').append($("<option />").val(0).text('Select City'));
-    $.each(response['Cities'], function () {
-    $('#BillingCityId').append($("<option />").val(this.CityId).text(this.Name));
-    });
-    }
-    })
-    .fail(function (jqxhr, status, error) {
-    // this is the ""error"" callback
-    alert('Error!');
-    });
-    }
+            if (countryId > 0) {
+                var dataToPost = {
+                    CountryId: countryId
+                };
+                $.post('/Api/GetStatesFor', dataToPost)
+                    .done(function (response, status, jqxhr) {
+                        // this is the "success" callback
+                        if (response['States'].length > 0) {
+                            $('#BillingCityId').append($("<option />").val(0).text('Select Country/State'));
+                            $('#BillingStateId').prop("disabled", false);
+                            $('#BillingStateId').append($("<option />").val(0).text('Select State'));
+                            $.each(response['States'], function () {
+                                $('#BillingStateId').append($("<option />").val(this.StateId).text(this.Name));
+                            });
+                        }
+                        else {
+                            $('#BillingStateId').append($("<option />").val(0).text('No State'));
+                            $('#BillingStateId').prop("disabled", true);
+                            fillCities(countryId, 0);
+                        }
+                    })
+                    .fail(function (jqxhr, status, error) {
+                        // this is the ""error"" callback
+                        alert('Error!');
+                    });
+            }
+            else {
+                $('#BillingStateId').append($("<option />").val(0).text('Select Country'));
+                $('#BillingStateId').prop("disabled", false);
+            }
+        });
+        $("#BillingStateId").change(function () {
+            var countryId = $('#BillingCountryId').val();
+            var stateId = this.value;
+            if (stateId > 0 && countryId > 0) {
+                fillCities(countryId, stateId);
+            }
+            else {
+                $('#BillingCityId').append($("<option />").val(0).text('Select Country/State'));
+            }
+        });
+        function fillCities(countryId, stateId) {
+            var dataToPost = {
+                CountryId: countryId,
+                StateId: stateId
+            };
+            $.post('/Api/GetCitiesFor', dataToPost)
+                .done(function (response, status, jqxhr) {
+                    if (response['Cities'].length > 0) {
+                        $('#BillingCityId').empty();
+                        $('#BillingCityId').append($("<option />").val(0).text('Select City'));
+                        $.each(response['Cities'], function () {
+                            $('#BillingCityId').append($("<option />").val(this.CityId).text(this.Name));
+                        });
+                    }
+                })
+                .fail(function (jqxhr, status, error) {
+                    // this is the ""error"" callback
+                    alert('Error!');
+                });
+        }
+        function fillShippingMethods(countryId) {
+            var dataToPost = {
+                CountryId: countryId,
+            };
+            $.post('/Api/GetShippingMethods', dataToPost)
+                .done(function (response, status, jqxhr) {
+                    $('#ShippingMethodId').empty();
+                    $('#ShippingMethodId').append($("<option />").val(0).text('Select Shipping Method'));
+                    $.each(response['ShippingMethods'], function () {
+                        $('#ShippingMethodId').append($("<option />").val(this.ShippingMethodId).text(this.Name));
+                    });
+                })
+                .fail(function (jqxhr, status, error) {
+                    // this is the ""error"" callback
+                    alert('Error!');
+                });
+        }
+    @*</script>*@
 }
