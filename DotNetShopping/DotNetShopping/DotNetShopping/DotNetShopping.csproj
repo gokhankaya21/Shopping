@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201903291403087_reqired.Designer.cs">
       <DependentUpon>201903291403087_reqired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904011456576_shipping.cs" />
+    <Compile Include="Migrations\201904011456576_shipping.Designer.cs">
+      <DependentUpon>201904011456576_shipping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
@@ -221,8 +225,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderProductModel.cs" />
+    <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\ProductImageModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ShippingModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -447,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903291403087_reqired.resx">
       <DependentUpon>201903291403087_reqired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904011456576_shipping.resx">
+      <DependentUpon>201904011456576_shipping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -116,6 +116,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.BillingTelephone, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.BillingTelephone, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.BillingTelephone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                
+                            </div>
+                        </div>
                     </div>
                 </li>
                 <li id="opc-shipping" class="section">
@@ -123,8 +137,114 @@
                         <span class="number">3</span>
                         <span class="title">Shipping Information</span>
                     </div>
-                    <div id="checkout-step-shipping" class="step a-item" style="display:none;">
+                    <div id="checkout-step-shipping" class="checkoutContent">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingFirstName, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingFirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingLastName, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingLastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingLastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingCompany, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingCompany, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingCompany, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingStreet1, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingStreet1, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingStreet1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingStreet2, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingStreet2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingCountryId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.DropDownList("ShippingCountryId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShippingCountryId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingStateId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.DropDownList("ShippingStateId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShippingStateId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingCityId, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.DropDownList("ShippingCityId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ShippingCityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingZip, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingZip, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingZip, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-label">
+                                    @Html.LabelFor(model => model.ShippingTelephone, htmlAttributes: new { @class = "control-label" })
+                                </div>
+                                <div class="input-editor">
+                                    @Html.EditorFor(model => model.ShippingTelephone, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ShippingTelephone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
 
+                            </div>
+                        </div>
 
                     </div>
                 </li>
@@ -133,7 +253,7 @@
                         <span class="number">4</span>
                         <span class="title">Shipping Method</span>
                     </div>
-                    <div id="checkout-step-shipping_method" class="step a-item" style="display:none;">
+                    <div id="checkout-step-shipping_method" class="checkoutContent">
 
                     </div>
                 </li>
@@ -142,7 +262,7 @@
                         <span class="number">5</span>
                         <span class="title">Payment Information</span>
                     </div>
-                    <div id="checkout-step-payment" class="step a-item" style="display:none;">
+                    <div id="checkout-step-payment" class="checkoutContent" >
 
                     </div>
                 </li>
@@ -151,7 +271,7 @@
                         <span class="number">6</span>
                         <span class="title">Order Review</span>
                     </div>
-                    <div id="checkout-step-review" class="step a-item" style="display:none;">
+                    <div id="checkout-step-review" class="checkoutContent">
 
                     </div>
                 </li>

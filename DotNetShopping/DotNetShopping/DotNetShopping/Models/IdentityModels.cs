@@ -46,5 +46,8 @@ namespace DotNetShopping.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order>Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<PaymentMethod>PaymentMethods { get; set; }
+        public DbSet<ShippingMethod>ShippingMethods { get; set; }
+        public DbSet<ShippingCost>ShippingCosts { get; set; }
     }
 }
