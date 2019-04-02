@@ -30,6 +30,7 @@
                     // this is the ""error"" callback
                     alert('Error!');
                 });
+            fillPaymentMethods(countryId);
         }
         else {
             $('#BillingStateId').append($("<option />").val(0).text('Select Country'));
@@ -105,6 +106,17 @@
         }
         
     });
+
+    $("#PaymentMethodId").change(function () {
+        if ($(this).val() > 0) {
+            var cost = $(this).find(':selected');
+            $('#DiscountCost').html('$' + cost);
+        }
+        else {
+            $('#DiscountCost').html('');
+        }
+
+    });
 });
 
 function fillCities(city, countryId, stateId) {
@@ -158,6 +170,31 @@ function fillShippingMethods(countryId) {
                 
             });
         })
+        .fail(function (jqxhr, status, error) {
+            // this is the ""error"" callback
+            alert('Error!');
+        });
+}
+
+function fillPaymentMethods(countryId) {
+    alert('total: ' + total);
+    var dataToPost = {
+        CountryId: countryId
+    };
+    $.post('/Api/GetPaymentMethods', dataToPost)
+     .done(function (response, status, jqxhr) {
+        $('#PaymentMethodId').empty();
+         $('#PaymentMethodId').append($("<option />").val(0).text('Select Payment Method'));
+         $.each(response['PaymentMethods'], function () {
+             var discount = 0;
+             if (this.PaymentMethodId == 3) {
+                 discount = total * this.PaymentDiscount;
+             } else if (this.PaymentMethodId == 5) {
+                 discount = total * this.PaymentDiscount;
+             }
+            $('#PaymentMethodId').append($("<option />").val(this.PaymentMethodId).text(this.Name).attr('data-discount', discount));
+        });
+    })
         .fail(function (jqxhr, status, error) {
             // this is the ""error"" callback
             alert('Error!');

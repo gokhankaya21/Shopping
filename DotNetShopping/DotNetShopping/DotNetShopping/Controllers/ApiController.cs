@@ -98,5 +98,13 @@ namespace DotNetShopping.Controllers
 
             return Json(new { Success = true, ShippingMethods = model }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetPaymentMethods(Int16 CountryId)
+        {
+            var isDomestic = CountryId == 2;
+            var model = db.PaymentMethods
+                .Where(x => x.Domestic == isDomestic && x.International != isDomestic)
+                .OrderBy(x=>x.Name).ToList();
+            return Json(new { Success = true, PaymentMethods = model }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -1045,6 +1045,14 @@ button.button:hover span {
     font-weight:bold;
 }
 
+.PaymentDiscount {
+    padding-top: 50px;
+}
+
+#PaymentDiscount {
+    font-weight: bold;
+}
+
 
 
 
