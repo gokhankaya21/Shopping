@@ -329,6 +329,7 @@
     <Content Include="Content\Site\slick.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\chartist.min.js" />
+    <Content Include="Scripts\checkout.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
