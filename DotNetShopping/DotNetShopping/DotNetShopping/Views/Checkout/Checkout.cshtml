@@ -292,15 +292,64 @@
                                     <select id="PaymentMethodId" class="input-editor form-control"></select>
                                     @Html.ValidationMessageFor(model => model.PaymentMethodId, "", new { @class = "text-danger" })
                                 </div>
+                                <div class="payment-creditcard">
+                                    <div class="input-label">
+                                        <label class="control-label">Card Number</label>
+                                    </div>
+                                    <div class="input-editor">
+                                        <input type="text" id="cardNumber" class="form-control">
+                                    </div>
+                                    <div class="input-label">
+                                        <label class="control-label">Name on Card</label>
+                                    </div>
+                                    <div class="input-editor">
+                                        <input type="text" id="cardHolder" class="form-control">
+                                    </div>
+                                    <div class="card-row">
+                                        <div class="card-date">
+                                            <div class="input-label">
+                                                <label class="control-label">Exp-Month</label>
+                                            </div>
+                                            <div class="input-editor">
+                                                <input type="text" id="cardExpirationMonth" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="card-date">
+                                            <div class="input-label">
+                                                <label class="control-label">Exp-Year</label>
+                                            </div>
+                                            <div class="input-editor">
+                                                <input type="text" id="cardExpirationYear" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-label">
+                                        <label class="control-label">CVV</label>
+                                    </div>
+                                    <div class="input-editor">
+                                        <input type="text" id="cardCsc" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="payment-paypal">
+                                    <div class="input-label">
+                                        <label class="control-label">Paypal Account</label>
+                                    </div>
+                                    <div class="input-editor">
+                                        <input type="text" id="paypal" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-6">
-                                @{
-                                    var total = cart.Sum(x => x.TotalPrice);
-                                }
-                                <input type="hidden" id="total" value="@total" />
+                                <div class="PaymentPadding"></div>
                                 <div class="PaymentDiscount">
+                                    @{
+                                        var totalPrice = cart.Sum(x => x.TotalPrice);
+                                    }
+                                    <input type="hidden" id="totalPrice" value="@totalPrice" />
+
                                     <span>Payment Discount: </span><span id="PaymentDiscount"></span>
                                 </div>
+                                <div id="PaymentInfo"></div>
                             </div>
                         </div>
                     </div>

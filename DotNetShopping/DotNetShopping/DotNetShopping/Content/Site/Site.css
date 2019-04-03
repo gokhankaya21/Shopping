@@ -1038,19 +1038,61 @@ button.button:hover span {
             border-radius: 0;
         }
 
-.ShippingCost{
-    padding-top:50px;
+.ShippingCost {
+    padding-top: 50px;
 }
-#ShippingCost{
-    font-weight:bold;
+
+#ShippingCost {
+    font-weight: bold;
 }
 
 .PaymentDiscount {
-    padding-top: 50px;
+    display: none;
 }
 
 #PaymentDiscount {
     font-weight: bold;
+}
+
+.PaymentPadding {
+    padding-top: 50px;
+}
+
+#PaymentInfo {
+    padding-top: 10px;
+}
+
+#checkout-step-payment {
+    min-height: 150px;
+}
+
+.payment-creditcard {
+    display:none;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.payment-paypal {
+    display: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#cardExpirationMonth{
+    width:50px;
+}
+#cardExpirationYear{
+    width:50px;
+}
+#cardCsc{
+    width:50px;
+}
+.card-row{
+    width:100%;
+    display:inline-block;
+}
+.card-date{
+    float:left;
+    padding-right:20px;
 }
 
 

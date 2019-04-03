@@ -104,18 +104,46 @@
         else {
             $('#ShippingCost').html('');
         }
-        
+
     });
 
     $("#PaymentMethodId").change(function () {
-        if ($(this).val() > 0) {
-            var cost = $(this).find(':selected');
-            $('#DiscountCost').html('$' + cost);
+        var paymentMethodId = parseInt($(this).val());
+        if (paymentMethodId > 0) {
+            if (paymentMethodId === 1 || paymentMethodId === 2) {
+                $('.payment-creditcard').show(200);
+                $('.payment-paypal').hide(200);
+                
+            }
+            else {
+                if (paymentMethodId === 6) {
+                    $('.payment-paypal').show(200);
+                }
+                else {
+                    $('.payment-paypal').hide(200);
+                }
+                $('.payment-creditcard').hide(200);
+            }
+            var totalPrice = parseFloat($('#totalPrice').val().replace(',', '.'));
+            var cost = parseFloat($('#ShippingMethodId').find(':selected').attr('data-cost').replace(',', '.'));
+            var discount = parseFloat($(this).find(':selected').attr('data-discount').replace(',', '.'));
+            if (discount > 0) {
+                var amount = (cost + totalPrice) * discount / 100;
+                $('#PaymentDiscount').html('$' + amount.toFixed(2));
+                $('.PaymentDiscount').show(200);
+            }
+            else {
+                $('.PaymentDiscount').hide(200);
+                
+            }
         }
         else {
-            $('#DiscountCost').html('');
+            $('.payment-paypal').hide(200);
+            $('.payment-creditcard').hide(200);
+            $('.PaymentDiscount').hide(200);
+            $('#PaymentDiscount').html('');
         }
-
+        $('#PaymentInfo').html($(this).find(':selected').attr('data-info'));
     });
 });
 
@@ -166,8 +194,8 @@ function fillShippingMethods(countryId) {
                     cost = this.CostTwoHalf;
                 }
 
-                $('#ShippingMethodId').append($("<option />").val(this.ShippingMethodId).text(this.Name).attr('data-cost',cost));
-                
+                $('#ShippingMethodId').append($("<option />").val(this.ShippingMethodId).text(this.Name).attr('data-cost', cost));
+
             });
         })
         .fail(function (jqxhr, status, error) {
@@ -177,24 +205,20 @@ function fillShippingMethods(countryId) {
 }
 
 function fillPaymentMethods(countryId) {
-    alert('total: ' + total);
+    var weight = parseFloat($('#weight').val().replace(',', '.'));
+    //alert('weight: ' + weight);
     var dataToPost = {
         CountryId: countryId
     };
     $.post('/Api/GetPaymentMethods', dataToPost)
-     .done(function (response, status, jqxhr) {
-        $('#PaymentMethodId').empty();
-         $('#PaymentMethodId').append($("<option />").val(0).text('Select Payment Method'));
-         $.each(response['PaymentMethods'], function () {
-             var discount = 0;
-             if (this.PaymentMethodId == 3) {
-                 discount = total * this.PaymentDiscount;
-             } else if (this.PaymentMethodId == 5) {
-                 discount = total * this.PaymentDiscount;
-             }
-            $('#PaymentMethodId').append($("<option />").val(this.PaymentMethodId).text(this.Name).attr('data-discount', discount));
-        });
-    })
+        .done(function (response, status, jqxhr) {
+            $('#PaymentMethodId').empty();
+            $('#PaymentMethodId').append($("<option />").val(0).text('Select Payment Method'));
+            $.each(response['PaymentMethods'], function () {
+                $('#PaymentMethodId').append($("<option />").val(this.PaymentMethodId).text(this.Name).attr('data-discount', this.PaymentDiscount).attr('data-info', this.PaymentInfo));
+
+            });
+        })
         .fail(function (jqxhr, status, error) {
             // this is the ""error"" callback
             alert('Error!');
