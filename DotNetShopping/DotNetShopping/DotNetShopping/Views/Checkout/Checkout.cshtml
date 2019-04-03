@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    IEnumerable<DotNetShopping.Models.CartListModel> cart = ViewBag.cart;
+    List<DotNetShopping.Models.CartListModel> cart = ViewBag.cart;
 }
 
 <h2>Checkout</h2>
@@ -360,11 +360,63 @@
                         <span class="title">Order Review</span>
                     </div>
                     <div id="checkout-step-review" class="checkoutContent">
-
+                        <table class="cartTable">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Product Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < cart.Count; i++)
+                                {
+                                    <tr>
+                                        <td><img src="~/ProductImage/@(cart[i].PhotoName)-1.jpg" /></td>
+                                        <td>@cart[i].VariantName @cart[i].ProductName</td>
+                                        <td>$@cart[i].UnitPrice</td>
+                                        <td> @cart[i].Quantity </td>
+                                        <td>$@cart[i].TotalPrice</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="checkout-total-Bg">
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td>Total:</td>
+                                    <td>$@totalPrice</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td>Shipping:</td>
+                                    <td id="shipping-total"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td>Discount:</td>
+                                    <td id="discount-total"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td class="grandTotalLabel">Grand Total:</td>
+                                    <td id="grand-total"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="checkout-footer checkout-total-Bg">
+                            <label class="conditions-container">
+                                I agree terms and conditions
+                                <input type="checkbox" id="conditions">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="checkout-submit"><button type="submit" title="Place Order" class="button btn-checkout"><span><span>Place Order</span></span></button></div>
+                        </div>
                     </div>
                 </li>
             </ol>
-            <input type="submit" value="Submit" class="btn btn-default" />
+            
         }
     </div>
     <div class="col-sm-3">

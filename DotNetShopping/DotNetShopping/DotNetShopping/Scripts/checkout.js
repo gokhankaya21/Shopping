@@ -100,6 +100,7 @@
         if ($(this).val() > 0) {
             var cost = $(this).find(':selected').attr('data-cost');
             $('#ShippingCost').html('$' + cost);
+            $('#shipping-total').html('$' + cost);
         }
         else {
             $('#ShippingCost').html('');
@@ -127,13 +128,20 @@
             var totalPrice = parseFloat($('#totalPrice').val().replace(',', '.'));
             var cost = parseFloat($('#ShippingMethodId').find(':selected').attr('data-cost').replace(',', '.'));
             var discount = parseFloat($(this).find(':selected').attr('data-discount').replace(',', '.'));
+            var grandTotal = 0;
             if (discount > 0) {
                 var amount = (cost + totalPrice) * discount / 100;
+                grandTotal = cost + totalPrice - amount;
                 $('#PaymentDiscount').html('$' + amount.toFixed(2));
+                $('#discount-total').html('$' + amount.toFixed(2));
+                $('#grand-total').html('$' + grandTotal.toFixed(2));
                 $('.PaymentDiscount').show(200);
             }
             else {
                 $('.PaymentDiscount').hide(200);
+                $('#discount-total').html('$0.00');
+                grandTotal = cost + totalPrice;
+                $('#grand-total').html('$' + grandTotal.toFixed(2));
                 
             }
         }
@@ -142,6 +150,8 @@
             $('.payment-creditcard').hide(200);
             $('.PaymentDiscount').hide(200);
             $('#PaymentDiscount').html('');
+            $('#discount-total').html('$0.00');
+            $('#grand-total').html('$0.00');
         }
         $('#PaymentInfo').html($(this).find(':selected').attr('data-info'));
     });
