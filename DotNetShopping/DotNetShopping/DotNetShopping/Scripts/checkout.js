@@ -114,7 +114,7 @@
             if (paymentMethodId === 1 || paymentMethodId === 2) {
                 $('.payment-creditcard').show(200);
                 $('.payment-paypal').hide(200);
-                
+
             }
             else {
                 if (paymentMethodId === 6) {
@@ -142,7 +142,7 @@
                 $('#discount-total').html('$0.00');
                 grandTotal = cost + totalPrice;
                 $('#grand-total').html('$' + grandTotal.toFixed(2));
-                
+
             }
         }
         else {
@@ -233,4 +233,56 @@ function fillPaymentMethods(countryId) {
             // this is the ""error"" callback
             alert('Error!');
         });
+}
+
+function billingNextClick() {
+    var value = parseInt($('input:radio[name=billingradio]:checked').val());
+    $('#checkout-step-billing').hide(200);
+    if (value === 1) {
+        $('#checkout-step-shipping').show(200);
+    }
+    else {
+        $('#checkout-step-shipping_method').show(200);
+    }
+
+}
+function shippingNextClick() {
+    $('#checkout-step-shipping').hide(200);
+    $('#checkout-step-shipping_method').show(200);
+}
+function shippingMethodNextClick() {
+    $('#checkout-step-shipping_method').hide(200);
+    $('#checkout-step-payment').show(200);
+}
+function paymentNextClick() {
+    $('#checkout-step-payment').hide(200);
+    $('#checkout-step-review').show(200);
+}
+function billingTitleClick() {
+    $('#checkout-step-billing').show(200);
+    $('#checkout-step-shipping').hide(200);
+    $('#checkout-step-shipping_method').hide(200);
+    $('#checkout-step-payment').hide(200);
+    $('#checkout-step-review').hide(200);
+}
+function shippingTitleClick() {
+    $('#checkout-step-billing').hide(200);
+    $('#checkout-step-shipping').show(200);
+    $('#checkout-step-shipping_method').hide(200);
+    $('#checkout-step-payment').hide(200);
+    $('#checkout-step-review').hide(200);
+}
+function shippingMethodTitleClick() {
+    $('#checkout-step-billing').hide(200);
+    $('#checkout-step-shipping').hide(200);
+    $('#checkout-step-shipping_method').show(200);
+    $('#checkout-step-payment').hide(200);
+    $('#checkout-step-review').hide(200);
+}
+function paymentTitleClick() {
+    $('#checkout-step-billing').hide(200);
+    $('#checkout-step-shipping').hide(200);
+    $('#checkout-step-shipping_method').hide(200);
+    $('#checkout-step-payment').show(200);
+    $('#checkout-step-review').hide(200);
 }
