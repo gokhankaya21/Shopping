@@ -236,27 +236,47 @@ function fillPaymentMethods(countryId) {
 }
 
 function billingNextClick() {
-    var value = parseInt($('input:radio[name=billingradio]:checked').val());
-    $('#checkout-step-billing').hide(200);
-    if (value === 1) {
-        $('#checkout-step-shipping').show(200);
-    }
-    else {
-        $('#checkout-step-shipping_method').show(200);
+    $('#myform').validate({
+
+    });
+    if ($('#myform').valid()) {
+        var value = parseInt($('input:radio[name=billingradio]:checked').val());
+        $('#checkout-step-billing').hide(200);
+        if (value === 1) {
+            $('#checkout-step-shipping').show(200);
+        }
+        else {
+            $('#checkout-step-shipping_method').show(200);
+        }
     }
 
 }
 function shippingNextClick() {
-    $('#checkout-step-shipping').hide(200);
-    $('#checkout-step-shipping_method').show(200);
+    $('#myform').validate({
+
+    });
+    if ($('#myform').valid()) {
+        $('#checkout-step-shipping').hide(200);
+        $('#checkout-step-shipping_method').show(200);
+    }
 }
 function shippingMethodNextClick() {
-    $('#checkout-step-shipping_method').hide(200);
-    $('#checkout-step-payment').show(200);
+    $('#myform').validate({
+
+    });
+    if ($('#myform').valid()) {
+        $('#checkout-step-shipping_method').hide(200);
+        $('#checkout-step-payment').show(200);
+    }
 }
 function paymentNextClick() {
-    $('#checkout-step-payment').hide(200);
-    $('#checkout-step-review').show(200);
+    $('#myform').validate({
+
+    });
+    if ($('#myform').valid()) {
+        $('#checkout-step-payment').hide(200);
+        $('#checkout-step-review').show(200);
+    }
 }
 function billingTitleClick() {
     $('#checkout-step-billing').show(200);

@@ -1,4 +1,4 @@
-﻿@model DotNetShopping.Models.Order
+﻿@model DotNetShopping.Models.CheckoutModel
 @{
     /**/
 
@@ -10,7 +10,7 @@
 <h2>Checkout</h2>
 <div class="row">
     <div class="col-sm-9">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm(null,null,FormMethod.Post,new { id = "myform" }))
         {
             <ol class="opc" id="checkoutSteps">
                 <li id="opc-billing" class="section">
@@ -297,7 +297,7 @@
                                         </div>
                                     </div>
                                     <div class="input-label"><label class="control-label">CVV</label></div>
-                                    <div class="input-editor"><input type="text" id="cardCsc" class="form-control"></div>
+                                    <div class="input-editor"><input type="text" id="cardCvv" class="form-control"></div>
 
                                 </div>
                                 <div class="payment-paypal">

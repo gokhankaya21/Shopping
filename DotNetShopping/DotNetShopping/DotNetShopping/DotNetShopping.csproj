@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201904011456576_shipping.Designer.cs">
       <DependentUpon>201904011456576_shipping.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904041708284_requiredorder.cs" />
+    <Compile Include="Migrations\201904041708284_requiredorder.Designer.cs">
+      <DependentUpon>201904041708284_requiredorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BrandModel.cs" />
@@ -475,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904011456576_shipping.resx">
       <DependentUpon>201904011456576_shipping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041708284_requiredorder.resx">
+      <DependentUpon>201904041708284_requiredorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
