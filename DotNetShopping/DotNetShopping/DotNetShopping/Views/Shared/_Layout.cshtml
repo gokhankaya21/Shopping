@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - DotNetShopping</title>
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="description" content="@ViewBag.Description" />
     @Styles.Render("~/Content/Site/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
@@ -28,7 +30,12 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="navTop nav navbar-nav">
-                                    <li class="searchBox"><input type="text" class="searchInput" placeholder="Search a product.." /><i class="searchIcon glyphicon glyphicon-search"></i></li>
+                                    <li class="searchBox">
+                                        <i class="searchIcon glyphicon glyphicon-search"></i>
+                                        <div class="searchSelect">
+                                            <select class="searchInput" style="width:200px;"></select>
+                                        </div>
+                                    </li>
                                     <li>@Html.ActionLink("DEALS", "Products", "Home")</li>
                                 </ul>
                                 @Html.Partial("_LoginPartial")
@@ -38,9 +45,9 @@
                             <div class="navbar-collapse collapse">
                                 <ul class="navBottom nav navbar-nav">
                                     <li>@Html.ActionLink("HOME", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("CATEGORIES", "Categories", "Home")</li>
                                     <li>@Html.ActionLink("PRODUCTS", "Products", "Home")</li>
-                                    <li>@Html.ActionLink("CONTACT", "About", "Home")</li>
+                                    <li>@Html.ActionLink("ABOUT", "Index", "Page", new { PageId = "AboutUs" }, new { })</li>
+                                    <li>@Html.ActionLink("CONTACT", "Index", "Page", new { PageId = "ContactUs" }, new { })</li>
                                     <li>
                                         <div class="cart">
                                             <a href="@Url.Action("Cart","Checkout")">
@@ -88,7 +95,7 @@
                         <li><i class="glyphicon glyphicon-triangle-right"></i><a href="#" title="About us">About us</a></li>
                         <li><i class="glyphicon glyphicon-triangle-right"></i><a href="#" title="Contact Us">Contact us</a></li>
                         <li><i class="glyphicon glyphicon-triangle-right"></i><a href="#" title="My Account">My Account</a></li>
-                        <li><i class="glyphicon glyphicon-triangle-right"></i><a href="#" title="My Account">Order history</a></li>
+                        <li><i class="glyphicon glyphicon-triangle-right"></i><a href="@Url.Action("Index","MyOrders")" title="My Account">Order History</a></li>
                         <li><i class="glyphicon glyphicon-triangle-right"></i><a href="#" title="Contact us">Advanced search</a></li>
                     </ul>
                 </div>
@@ -123,6 +130,8 @@
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/select2")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/shopping")
     @RenderSection("scripts", required: false)

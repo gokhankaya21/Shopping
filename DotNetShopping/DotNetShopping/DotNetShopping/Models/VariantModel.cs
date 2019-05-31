@@ -18,13 +18,17 @@ namespace DotNetShopping.Models
         public string Name { get; set; }
 
         [ForeignKey("Product")]
-        public Int64 ProductId { get; set; 
-}
+        public Int64 ProductId
+        {
+            get; set;
+        }
         public Product Product { get; set; }
 
         public Decimal UnitPrice { get; set; }
         public Decimal Cost { get; set; }
         public Int16 Stock { get; set; }
+
+        public Int16 CampaignId { get; set; }
 
         public DateTime CreateDate { get; set; }
         public string CreateUser { get; set; }

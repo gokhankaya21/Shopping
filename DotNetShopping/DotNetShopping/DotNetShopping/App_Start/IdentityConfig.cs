@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DotNetShopping.Models;
+using DotNetShopping.Helpers;
 
 namespace DotNetShopping
 {
@@ -19,7 +20,14 @@ namespace DotNetShopping
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            //return Task.FromResult(0);
+            var emailHelper = new EmailHelper();
+            var emailModel = new EmailModel();
+            emailModel.MailTo = message.Destination;
+            emailModel.Title = message.Subject;
+            emailModel.Body = message.Body;
+            string error = "";
+            return Task.FromResult(emailHelper.SendEmail(emailModel, ref error));
         }
     }
 
@@ -40,7 +48,7 @@ namespace DotNetShopping
         {
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -81,7 +89,7 @@ namespace DotNetShopping
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
+                manager.UserTokenProvider =
                     new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;

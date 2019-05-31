@@ -18,6 +18,13 @@ namespace DotNetShopping
                 url: "p/{id}/{name}",
                 defaults: new { controller = "ProductDetail", action = "Product", name = UrlParameter.Optional }
                 );
+
+            routes.MapRoute(
+               name: "Page",
+               url: "Page/{PageId}",
+               defaults: new { controller = "Page", action = "Index" }
+               );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
